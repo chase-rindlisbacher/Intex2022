@@ -16,7 +16,10 @@ class Person(models.Model):
 
 class Patient(models.Model):
     patient_id = models.ForeignKey(Person, on_delete=models.CASCADE)
+    patient_first_name = Person.objects.get(id=patient_id).first_name
+    patient_last_name = Person.objects.get(id=patient_id).last_name
     age = models.FloatField()
     height = models.IntegerField()
     weight = models.IntegerField()
     birthday = models.DateField()
+
