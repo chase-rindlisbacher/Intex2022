@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'kidneyfoundation.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kidney_patients',
+        'NAME': 'kidneys',
         'USER': 'postgres',
         'PASSWORD': 'joRdaN23#1', 
         'HOST': 'localhost'
