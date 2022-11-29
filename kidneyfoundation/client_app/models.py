@@ -57,8 +57,8 @@ class Patient(models.Model):
     height = models.IntegerField()
     weight = models.IntegerField()
     diagnosis = models.ForeignKey(Condition, on_delete=models.DO_NOTHING)
-    diagnosis_date = models.DateField(default=date.today())
-    birthday = models.DateField(default=date.today())
+    diagnosis_date = models.DateField()
+    birthday = models.DateField()
     sponsor = models.ManyToManyField(Sponsor, blank=True)
     comorbidity = models.ManyToManyField(Comorbidity, blank=True)
 
@@ -67,6 +67,22 @@ class Patient(models.Model):
 
     class Meta:
         db_table = 'patient'
+
+class Patient_Login(models.Model):
+    patient_id = models.OneToOneField(Patient, primary_key=True, on_delete=models.CASCADE)
+    username = models.CharField(max_length=30)
+    password = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = 'patient_login'
+
+class Sponsor_Login(models.Model):
+    sponsor_id = models.OneToOneField(Sponsor, primary_key=True, on_delete=models.CASCADE)
+    username = models.CharField(max_length=30)
+    password = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = 'sponsor_login'
 
 class Nutrient(models.Model):
     name = models.CharField(max_length=30)
