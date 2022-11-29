@@ -10,6 +10,12 @@ def loginPageView(request, user_type) :
     }
     return render(request, 'client_app/login.html', context)
 
+def newAccountPageView(request, user_type) :
+    context = {
+        'type': user_type
+    }
+    return render(request, 'client_app/new_user.html', context)
+
 def myMenuView(request):
     return render(request, 'client_app/view_items.html')
     
