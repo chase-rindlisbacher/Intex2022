@@ -42,17 +42,17 @@ class User(models.Model):
         db_table = 'user'
 
 class Sponsor(models.Model):
-    sponsor_id = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
+    sponsor = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
     role = models.ManyToManyField(Role)
 
     def __str__(self):
-        return (f'{User.objects.get(id=self.sponsor_id).last_name}, {User.objects.get(id=self.sponsor_id).first_name}')
+        return (f'{User.objects.get(id=self.sponsor).last_name}, {User.objects.get(id=self.sponsor).first_name}')
 
     class Meta:
         db_table = 'sponsor'
 
 class Patient(models.Model):
-    patient_id = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
+    patient = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
     age = models.FloatField()
     height = models.IntegerField()
     weight = models.IntegerField()
@@ -63,13 +63,13 @@ class Patient(models.Model):
     comorbidity = models.ManyToManyField(Comorbidity, blank=True)
 
     def __str__(self):
-        return (f'{User.objects.get(id=self.patient_id).last_name}, {User.objects.get(id=self.patient_id).first_name}')
+        return (f'{User.objects.get(id=self.patient).last_name}, {User.objects.get(id=self.patient).first_name}')
 
     class Meta:
         db_table = 'patient'
 
 class Patient_Login(models.Model):
-    patient_id = models.OneToOneField(Patient, primary_key=True, on_delete=models.CASCADE)
+    patient = models.OneToOneField(Patient, primary_key=True, on_delete=models.CASCADE)
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
 
@@ -77,7 +77,7 @@ class Patient_Login(models.Model):
         db_table = 'patient_login'
 
 class Sponsor_Login(models.Model):
-    sponsor_id = models.OneToOneField(Sponsor, primary_key=True, on_delete=models.CASCADE)
+    sponsor = models.OneToOneField(Sponsor, primary_key=True, on_delete=models.CASCADE)
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
 
@@ -168,7 +168,7 @@ class Drink_Item(models.Model):
         db_table = 'drink_item'
 
 class Report_Food(models.Model):
-    patient_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     date = models.DateTimeField()
     eating_time = models.CharField(max_length=10, default='Snack')
     units_count = models.FloatField()
@@ -178,7 +178,7 @@ class Report_Food(models.Model):
         db_table = 'report_food'
 
 class Report_Drink(models.Model):
-    patient_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     date = models.DateTimeField()
     eating_time = models.CharField(max_length=10, default='Snack')
     units_count = models.FloatField()
@@ -188,7 +188,7 @@ class Report_Drink(models.Model):
         db_table = 'report_drink'
 
 class Report_Serum(models.Model):
-    patient_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     date = models.DateTimeField()
     
     potassium = models.FloatField()
