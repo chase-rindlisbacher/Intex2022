@@ -18,16 +18,16 @@ def newAccountPageView(request) :
     return render(request, 'client_app/new_user.html')
 
 def myMenuView(request):
-    return render(request, 'client_app/view_items.html')
+    return render(request, 'client_app/mymenu.html')
     
 def myMenuAdd(request):
-    return render(request, 'client_app/add_item.html')
+    return render(request, 'client_app/addfoods.html')
 
-def myPostsView(request):
-    return render(request, 'client_app/view_posts.html')
+def myFoodJournalView(request):
+    return render(request, 'client_app/myfoodjournal.html')
 
-def myPostsAdd(request):
-    return render(request, 'client_app/add_post.html')
+def myFoodJournalAdd(request):
+    return render(request, 'client_app/addjournalentry.html')
 
-def myStatsView(request):
-    return render(request, 'client_app/highlights.html')
+def myDashboardView(request):
+    return render(request, 'client_app/mydashboard.html')

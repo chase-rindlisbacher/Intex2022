@@ -5,7 +5,9 @@ urlpatterns = [
     path('login/', loginPageView, name='login'),
     path('create/', newAccountPageView, name='new_user'),
     path('mymenu/', myMenuView, name='mymenu'),
-    path('myfoodjournal/', myPostsView, name='myfoodjournal'),
-    path('mydashboard/', myStatsView, name='mydashboard'),
+    path('mymenu/add', myMenuAdd, name='mymenuadd'),
+    path('myfoodjournal/', myFoodJournalView, name='myfoodjournal'),
+    path('myfoodjournal/add', myFoodJournalAdd, name='myfoodjournaladd'),
+    path('mydashboard/', myDashboardView, name='mydashboard'),
     path('', indexPageView, name='index'),
 ]
