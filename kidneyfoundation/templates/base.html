@@ -30,7 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
-  {% block css %}
+  {% block pageCSS %}
   {% endblock %}
 
   <!-- =======================================================
@@ -54,7 +54,7 @@
       {% block navigation %}
       {% endblock %}
 
-      <a href="#appointment" class="appointment-btn scrollto"><span class="d-none d-md-inline">Make an</span> Appointment</a>
+      <a href="{% url 'login' %}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span></a>
 
     </div>
   </header><!-- End Header -->
@@ -75,21 +75,14 @@
           <!-- You can delete the links only if you purchased the pro version. -->
           <!-- Licensing information: https://bootstrapmade.com/license/ -->
           <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/ -->
-          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+          Bootstrap from <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
-      </div>
-      <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
       </div>
     </div>
   </footer><!-- End Footer -->
 
   <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><span style="color: white;">Top</span></a>
 
   <!-- Vendor JS Files -->
   <script src="{% static 'vendor/purecounter/purecounter_vanilla.js' %}"></script>

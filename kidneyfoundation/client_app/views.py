@@ -1,8 +1,15 @@
 from django.shortcuts import render, HttpResponse
+from .models import *
 
 # Create your views here.
 def indexPageView(request) :
-    return render(request, 'client_app/index.html')
+    nutrients = Nutrient.objects.filter(frequency = 'daily').order_by('name')
+
+    context = {
+        'nutrients': nutrients
+    }
+
+    return render(request, 'client_app/index.html', context)
 
 def loginPageView(request) :
     return render(request, 'client_app/login.html')

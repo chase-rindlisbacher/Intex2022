@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block pageCSS %}
+<link href="{% static 'css/our.css' %}" rel="stylesheet">
+{% endblock %}
 {% block navigation %}
 <nav id="navbar" class="navbar order-last order-lg-0">
   <ul>
-    <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-    <li><a class="nav-link scrollto" href="#about">About</a></li>
-    <li><a class="nav-link scrollto" href="#services">Services</a></li>
-    <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
-    <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
+    <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'mydashboard' %}">MyDashboard</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'myfoodjournal' %}">MyFoodJournal</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'mymenu' %}">MyDiet</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'index' %}">MyCommunity</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'index' %}">MyLearningCenter</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'index' %}">MyProfile</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'index' %}#faq">FAQ</a></li>
+    <!-- Keep but don't use right now 
     <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
       <ul>
         <li><a href="#">Drop Down 1</a></li>
@@ -23,8 +31,7 @@
         <li><a href="#">Drop Down 3</a></li>
         <li><a href="#">Drop Down 4</a></li>
       </ul>
-    </li>
-    <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+    </li>-->
   </ul>
   <i class="bi bi-list mobile-nav-toggle"></i>
 </nav><!-- .navbar -->
@@ -101,7 +108,7 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="count-box">
-              <i class="fas fa-user-md"></i>
+              <i class="fas fa-heartbeat"></i>
               <span data-purecounter-start="0" data-purecounter-end="33" data-purecounter-duration="1" class="purecounter"></span>
               <p>% of population at high risk for kidney disease</p>
             </div>
@@ -109,7 +116,7 @@
 
           <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
             <div class="count-box">
-              <i class="far fa-hospital"></i>
+              <i class="far fa-frown"></i>
               <span data-purecounter-start="0" data-purecounter-end="90" data-purecounter-duration="1" class="purecounter"></span>
               <p>% of kidney function that can be lost before you have symptoms</p>
             </div>
@@ -117,7 +124,7 @@
 
           <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
             <div class="count-box">
-              <i class="fas fa-flask"></i>
+              <i class="fas fa-walking"></i>
               <span data-purecounter-start="0" data-purecounter-end="50" data-purecounter-duration="1" class="purecounter"></span>
               <p>% of patients who may prevent ESRD with diet and lifestyle changes</p>
             </div>
@@ -151,7 +158,7 @@
             <div class="icon-box">
               <div class="icon"><i class="fas fa-chart-line"></i></div>
               <h4><a href="">MyDashboard</a></h4>
-              <p>See your progress towards your daily, weekly, and monthly goals!</p>
+              <p>See your progress towards your daily, weekly, and monthly goals</p>
             </div>
           </div>
 
@@ -159,7 +166,7 @@
             <div class="icon-box">
               <div class="icon"><i class="fas fa-edit"></i></div>
               <h4><a href="">MyFoodJournal</a></h4>
-              <p>Keep a journal of everything you eat and we'll help you stay on track with your essential nutrients!</p>
+              <p>Keep a journal of everything you eat and we'll help you stay on track with your essential nutrients</p>
             </div>
           </div>
 
@@ -167,7 +174,7 @@
             <div class="icon-box">
               <div class="icon"><i class="fas fa-apple-alt"></i></div>
               <h4><a href="">MyDiet</a></h4>
-              <p>See what you've eaten recently and get tips for foods you might like!</p>
+              <p>See what you've eaten recently and get tips for foods you might like</p>
             </div>
           </div>
 
@@ -183,7 +190,7 @@
             <div class="icon-box">
               <div class="icon"><i class="fas fa-school"></i></div>
               <h4><a href="">MyLearningCenter</a></h4>
-              <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
+              <p>Take a minute to learn more about kidney diseases, like CKD, and how life can be enjoyed through lifestyle changes</p>
             </div>
           </div>
 
@@ -191,7 +198,7 @@
             <div class="icon-box">
               <div class="icon"><i class="fas fa-house-user"></i></div>
               <h4><a href="">MyProfile</a></h4>
-              <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
+              <p>Manage and edit your profile. It's important to keep it up-to-date and accurate</p>
             </div>
           </div>
 
@@ -207,53 +214,94 @@
 
         <div class="section-title">
           <h2>Frequently Asked Questions</h2>
-          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          <p>Frequently asked questions about ours services, kidney disease, and dietary restrictions</p>
         </div>
 
         <div class="faq-list">
           <ul>
             <li data-aos="fade-up">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Non consectetur a erat nam at lectus urna duis? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">I have kidney disease. What nutrients do I need?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
                 <p>
-                  Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                  We emphasize focusing on sodium, protein, water, potassium, and phosphorus intakes. This chart shows you in more detail the daily values for each nutrient.
                 </p>
+                <center>
+                  <p style="font-weight: bold;">Stages 3 or 4</p>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Nutrient</th>
+                        <th>Recommended Range</th>
+                        <th>Measuring Units</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for nutrient in nutrients %}
+                        {% if nutrient.gender_specific != 'all'%}
+                          {% if nutrient.patient_target_max == nutrient.patient_target_min %}
+                            <tr>
+                              <td>{{nutrient.name}}</td>
+                              <td>{{nutrient.patient_target_min}}</td>
+                              <td>{{nutrient.units}} ({{nutrient.gender_specific}} patients)</td>
+                            </tr>
+                          {% else %}
+                            <tr>
+                              <td>{{nutrient.name}}</td>
+                              <td>{{nutrient.patient_target_min}} - {{nutrient.patient_target_max}}</td>
+                              <td>{{nutrient.units}} ({{nutrient.gender_specific}} patients)</td>
+                            </tr>
+                          {% endif %}
+                        {% else %}
+                          
+                          {% if nutrient.patient_target_max == nutrient.patient_target_min %}
+                            <tr>
+                              <td>{{nutrient.name}}</td>
+                              <td>{{nutrient.patient_target_min}}</td>
+                              <td>{{nutrient.units}}</td>
+                            </tr>
+                          {% else %}
+                            <tr>
+                              <td>{{nutrient.name}}</td>
+                              <td>{{nutrient.patient_target_min}} - {{nutrient.patient_target_max}}</td>
+                              <td>{{nutrient.units}}</td>
+                            </tr>
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                <center>
               </div>
             </li>
 
             <li data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Feugiat scelerisque varius morbi enim nunc? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Where can I find good kidney-friendly cooking recipes?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                  There are a bunch of websites with kidney-friendly, recipes! Here are a few of our favorites:
+                </p>
+                <br>
+                <div>
+                    <a href="https://www.kidney.org/recipes-search">National Kidney Foundation Recipes</a>
+                    <a href="https://www.davita.com/diet-nutrition/recipes">Davita Kidney Care</a>
+                </div>
+                <br>
+                <p>
+                  Click the link below if you would like a customized meal plan!
+                  <br>
+                  <a href="#">Customize my plan</a>
                 </p>
               </div>
             </li>
 
             <li data-aos="fade-up" data-aos-delay="200">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Dolor sit amet consectetur adipiscing elit? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">How do I input my food in my food journal?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
               <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
                 <p>
-                  Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                  Simply click on 'Food Journal' in the navigation bar and you will have the option to add food items, or meals, and then add them to your food journal!
                 </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="300">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                  Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="400">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                  Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
-                </p>
+                <br>
+                <a href="#">MyFoodJournal</a>
               </div>
             </li>
 
