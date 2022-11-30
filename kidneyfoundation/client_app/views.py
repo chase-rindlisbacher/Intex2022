@@ -30,7 +30,13 @@ def myFoodJournalAdd(request):
     return render(request, 'client_app/addjournalentry.html')
 
 def myDashboardView(request):
-    return render(request, 'client_app/mydashboard.html')
+    mg_nutrients = Nutrient.objects.filter(units='mg', frequency='daily')
+
+    context = {
+        'mg_nutrients': mg_nutrients
+    }
+
+    return render(request, 'client_app/mydashboard.html', context)
 
 def myProfileView(request):
     return render(request, 'client_app/myprofile.html')
