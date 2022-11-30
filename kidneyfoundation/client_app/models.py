@@ -94,7 +94,7 @@ class Nutrient(models.Model):
     patient_target_min = models.FloatField(blank=True)
     patient_target_max = models.FloatField(blank=True)
     dialysis_target_min = models.FloatField(blank=True)
-    dialysis_taget_max = models.FloatField(blank=True)
+    dialysis_target_max = models.FloatField(blank=True)
     units = models.CharField(max_length=10)
     actively_track = models.BooleanField(default=True)
 
