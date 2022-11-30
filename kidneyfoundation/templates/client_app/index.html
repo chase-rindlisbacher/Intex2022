@@ -9,11 +9,11 @@
     <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mydashboard' %}">MyDashboard</a></li>
     <li><a class="nav-link scrollto" href="{% url 'myfoodjournal' %}">MyFoodJournal</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'mymenu' %}">MyDiet</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'index' %}">MyCommunity</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'mymenu' %}">MyMenu</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'mycommunity' %}">MyCommunity</a></li>
     <li><a class="nav-link scrollto" href="{% url 'index' %}">MyLearningCenter</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'index' %}">MyProfile</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'index' %}#faq">FAQ</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'myprofile' %}">MyProfile</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'index'  %}#faq">FAQ</a></li>
     <!-- Keep but don't use right now 
     <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
       <ul>
@@ -220,13 +220,13 @@
         <div class="faq-list">
           <ul>
             <li data-aos="fade-up">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">I have kidney disease. What nutrients do I need?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#faq-list-1">I have kidney disease. What nutrients do I need?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-1" class="collapse" data-bs-parent=".faq-list">
                 <p>
                   We emphasize focusing on sodium, protein, water, potassium, and phosphorus intakes. This chart shows you in more detail the daily values for each nutrient.
                 </p>
                 <center>
-                  <p style="font-weight: bold;">Stages 3 or 4</p>
+                  <p style="font-weight: bold;">Stages 3 or 4 Daily Values</p>
                   <table>
                     <thead>
                       <tr>

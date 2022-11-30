@@ -31,3 +31,9 @@ def myFoodJournalAdd(request):
 
 def myDashboardView(request):
     return render(request, 'client_app/mydashboard.html')
+
+def myProfileView(request):
+    return render(request, 'client_app/myprofile.html')
+
+def myCommunityView(request):
+    return render(request, 'client_app/mycommunity.html')

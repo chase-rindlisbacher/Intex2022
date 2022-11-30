@@ -9,5 +9,7 @@ urlpatterns = [
     path('myfoodjournal/', myFoodJournalView, name='myfoodjournal'),
     path('myfoodjournal/add', myFoodJournalAdd, name='myfoodjournaladd'),
     path('mydashboard/', myDashboardView, name='mydashboard'),
+    path('myprofile/', myProfileView, name='myprofile'),
+    path('mycommunity/', myCommunityView, name='mycommunity'),
     path('', indexPageView, name='index'),
 ]
