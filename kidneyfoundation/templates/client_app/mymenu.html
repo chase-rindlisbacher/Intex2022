@@ -9,7 +9,7 @@
     <li><a class="nav-link scrollto" href="{% url 'index' %}">Home</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mydashboard' %}">MyDashboard</a></li>
     <li><a class="nav-link scrollto" href="{% url 'myfoodjournal' %}">MyFoodJournal</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'mymenu' %}">MyMenu</a></li>
+    <li><a class="nav-link scrollto active" href="{% url 'mymenu' %}">MyMenu</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mycommunity' %}">MyCommunity</a></li>
     <li><a class="nav-link scrollto" href="{% url 'index' %}">MyLearningCenter</a></li>
     <li><a class="nav-link scrollto" href="{% url 'myprofile' %}">MyProfile</a></li>
@@ -40,8 +40,8 @@
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
     <div class="container">
-      <h1>Eat Well, Live Well</h1>
-      <h2>Get the best options for eating right and living strong</h2>
+      <h1>Add your favorite foods to your menu</h1>
+      <h2>Use our food selection tool to pick the foods you eat and add them to your MyMenu</h2>
       <a href="{% url 'login' %}" class="btn-get-started scrollto">Get Started</a>
     </div>
   </section><!-- End Hero -->
@@ -207,109 +207,6 @@
       </div>
     </section>
     <!-- End Services Section -->
-
-    <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq section-bg">
-      <div class="container">
-
-        <div class="section-title">
-          <h2>Frequently Asked Questions</h2>
-          <p>Frequently asked questions about ours services, kidney disease, and dietary restrictions</p>
-        </div>
-
-        <div class="faq-list">
-          <ul>
-            <li data-aos="fade-up">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapsed" data-bs-target="#faq-list-1">I have kidney disease. What nutrients do I need?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-1" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                  We emphasize focusing on sodium, protein, water, potassium, and phosphorus intakes. This chart shows you in more detail the daily values for each nutrient.
-                </p>
-                <center>
-                  <p style="font-weight: bold;">Stages 3 or 4 Daily Values</p>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Nutrient</th>
-                        <th>Recommended Range</th>
-                        <th>Measuring Units</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for nutrient in nutrients %}
-                        {% if nutrient.gender_specific != 'all'%}
-                          {% if nutrient.patient_target_max == nutrient.patient_target_min %}
-                            <tr>
-                              <td>{{nutrient.name}}</td>
-                              <td>{{nutrient.patient_target_min}}</td>
-                              <td>{{nutrient.units}} ({{nutrient.gender_specific}} patients)</td>
-                            </tr>
-                          {% else %}
-                            <tr>
-                              <td>{{nutrient.name}}</td>
-                              <td>{{nutrient.patient_target_min}} - {{nutrient.patient_target_max}}</td>
-                              <td>{{nutrient.units}} ({{nutrient.gender_specific}} patients)</td>
-                            </tr>
-                          {% endif %}
-                        {% else %}
-                          
-                          {% if nutrient.patient_target_max == nutrient.patient_target_min %}
-                            <tr>
-                              <td>{{nutrient.name}}</td>
-                              <td>{{nutrient.patient_target_min}}</td>
-                              <td>{{nutrient.units}}</td>
-                            </tr>
-                          {% else %}
-                            <tr>
-                              <td>{{nutrient.name}}</td>
-                              <td>{{nutrient.patient_target_min}} - {{nutrient.patient_target_max}}</td>
-                              <td>{{nutrient.units}}</td>
-                            </tr>
-                          {% endif %}
-                        {% endif %}
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                <center>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Where can I find good kidney-friendly cooking recipes?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                  There are a bunch of websites with kidney-friendly, recipes! Here are a few of our favorites:
-                </p>
-                <br>
-                <div>
-                    <a href="https://www.kidney.org/recipes-search">National Kidney Foundation Recipes</a>
-                    <a href="https://www.davita.com/diet-nutrition/recipes">Davita Kidney Care</a>
-                </div>
-                <br>
-                <p>
-                  Click the link below if you would like a customized meal plan!
-                  <br>
-                  <a href="#">Customize my plan</a>
-                </p>
-              </div>
-            </li>
-
-            <li data-aos="fade-up" data-aos-delay="200">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">How do I input my food in my food journal?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                  Simply click on 'Food Journal' in the navigation bar and you will have the option to add food items, or meals, and then add them to your food journal!
-                </p>
-                <br>
-                <a href="#">MyFoodJournal</a>
-              </div>
-            </li>
-
-          </ul>
-        </div>
-
-      </div>
-    </section><!-- End Frequently Asked Questions Section -->
 
  </main>
  <!-- End #main -->

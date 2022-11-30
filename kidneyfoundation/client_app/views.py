@@ -1,32 +1,39 @@
 from django.shortcuts import render, HttpResponse
+from .models import *
 
 # Create your views here.
 def indexPageView(request) :
-    return render(request, 'client_app/index.html')
+    nutrients = Nutrient.objects.filter(frequency = 'daily').order_by('name')
 
-def loginPageView(request, user_type) :
     context = {
-        'type': user_type
+        'nutrients': nutrients
     }
-    return render(request, 'client_app/login.html', context)
 
-def newAccountPageView(request, user_type) :
-    context = {
-        'type': user_type
-    }
-    return render(request, 'client_app/new_user.html', context)
+    return render(request, 'client_app/index.html', context)
+
+def loginPageView(request) :
+    return render(request, 'client_app/login.html')
+
+def newAccountPageView(request) :
+    return render(request, 'client_app/new_user.html')
 
 def myMenuView(request):
-    return render(request, 'client_app/view_items.html')
+    return render(request, 'client_app/mymenu.html')
     
 def myMenuAdd(request):
-    return render(request, 'client_app/add_item.html')
+    return render(request, 'client_app/addfoods.html')
 
-def myPostsView(request):
-    return render(request, 'client_app/view_posts.html')
+def myFoodJournalView(request):
+    return render(request, 'client_app/myfoodjournal.html')
 
-def myPostsAdd(request):
-    return render(request, 'client_app/add_post.html')
+def myFoodJournalAdd(request):
+    return render(request, 'client_app/addjournalentry.html')
 
-def myStatsView(request):
-    return render(request, 'client_app/highlights.html')
+def myDashboardView(request):
+    return render(request, 'client_app/mydashboard.html')
+
+def myProfileView(request):
+    return render(request, 'client_app/myprofile.html')
+
+def myCommunityView(request):
+    return render(request, 'client_app/mycommunity.html')

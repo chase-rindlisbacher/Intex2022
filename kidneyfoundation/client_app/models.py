@@ -86,6 +86,7 @@ class Sponsor_Login(models.Model):
 
 class Nutrient(models.Model):
     name = models.CharField(max_length=30)
+    frequency = models.CharField(max_length=30)
     gender_specific = models.CharField(max_length=10, blank=True)
     healthy_target_min = models.FloatField(blank=True)
     healthy_target_max = models.FloatField(blank=True)
@@ -101,6 +102,9 @@ class Nutrient(models.Model):
 
     class Meta:
         db_table = 'nutrient'
+        constraints = [
+            models.UniqueConstraint(fields=['name', 'frequency', 'gender_specific'], name='nutrition_frequency_PK')
+        ]
 
 class Food_Units(models.Model):
     name = models.CharField(max_length=30)
