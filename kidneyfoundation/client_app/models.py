@@ -56,6 +56,7 @@ class Patient(models.Model):
     age = models.FloatField()
     height = models.IntegerField()
     weight = models.IntegerField()
+    sex = models.CharField(max_length=10, default='non-binary')
     diagnosis = models.ForeignKey(Condition, on_delete=models.DO_NOTHING)
     diagnosis_date = models.DateField()
     birthday = models.DateField()
