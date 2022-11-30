@@ -4,17 +4,11 @@ from django.shortcuts import render, HttpResponse
 def indexPageView(request) :
     return render(request, 'client_app/index.html')
 
-def loginPageView(request, user_type) :
-    context = {
-        'type': user_type
-    }
-    return render(request, 'client_app/login.html', context)
+def loginPageView(request) :
+    return render(request, 'client_app/login.html')
 
-def newAccountPageView(request, user_type) :
-    context = {
-        'type': user_type
-    }
-    return render(request, 'client_app/new_user.html', context)
+def newAccountPageView(request) :
+    return render(request, 'client_app/new_user.html')
 
 def myMenuView(request):
     return render(request, 'client_app/view_items.html')
