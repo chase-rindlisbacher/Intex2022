@@ -21,14 +21,14 @@
               <div>
                 <div class='Instruction'>
   
-                  <p>Sign up</p>
+                  <h1>Sign up</h1>
   
                   <form name='form' method='post' action"{% url 'new_user' %}">
                     {% csrf_token %}
                     <div>
                       <i></i>
                       <div>
-                        <input type="text" id="" placeholder='John' />
+                        <input type="text" id="fname" placeholder='John' name='fname' />
                         <label for="form3Example1c">First Name</label>
                       </div>
                     </div>
@@ -36,7 +36,7 @@
                     <div>
                       <i></i>
                       <div>
-                        <input type="text" id="form3Example1c" placeholder='Doe' />
+                        <input type="text" id="lname" placeholder='Doe' name='lname' />
                         <label for="form3Example1c">Last Name</label>
                       </div>
                     </div>
@@ -44,7 +44,7 @@
                     <div>
                       <i></i>
                       <div>
-                        <input type="number" id="form3Example1c" placeholder='18'/>
+                        <input type="number" id="age" placeholder='18' name='age'/>
                         <label for="form3Example1c">Your Age (yrs)</label>
                       </div>
                     </div>
@@ -52,7 +52,7 @@
                     <div>
                       <i></i>
                       <div>
-                        <input type="number" id="form3Example1c" placeholder='72' />
+                        <input type="number" id="height" placeholder='72' name='height' />
                         <label for="form3Example1c">Your Height (in.)</label>
                       </div>
                     </div>
@@ -60,7 +60,7 @@
                     <div>
                       <i></i>
                       <div>
-                        <input type="number" id="form3Example1c" placeholder='185' />
+                        <input type="number" id="weight" placeholder='185' name='weight' />
                         <label for="form3Example1c">Your Weight (lbs)</label>
                       </div>
                     </div>
@@ -68,9 +68,17 @@
                     <div>
                       <i></i>
                       <div>
-                        <input type="radio" id="form3Example1c" placeholder='185' name="" />
+                        <input type="date" id="bday" name='bday' />
+                        <label for="form3Example1c">Your Birthday</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <i></i>
+                      <div>
+                        <input type="radio" id="sex" placeholder='185' name="sex" value='M' />
                         <label for="form3Example1c">Male</label>
-                        <input type="radio" id="form3Example1c" placeholder='185' />
+                        <input type="radio" id="sex" placeholder='185' name='sex' value='F' />
                         <label for="form3Example1c">Female</label>
                       </div>
                     </div>
@@ -78,15 +86,38 @@
                     <div>
                       <i></i>
                       <div>
-                        <input type="email" id="form3Example3c" placeholder='example@email.com' />
+                        <input type="email" id="form3Example3c" placeholder='example@email.com' name='email' />
                         <label for="form3Example3c">Your Email</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <br>
+                      <div>
+                        <i></i>
+                        <div>
+                          <input type="text" id="phone" name='phone' />
+                          <label for="form3Example1c">Phone Number</label>
+                        </div>
+                      </div>
+                      <i></i>
+                      <br>
+                      <div>
+                        <label for="diagnosis">Diagnosis</label>
+                        <select id='diagnosis' required>
+                          <option>Stage 1</option>
+                          <option>Stage 2</option>
+                          <option>Stage 3</option>
+                          <option selected>Stage 4</option>
+                          <option>On Dialysis</option>
+                        </select>
                       </div>
                     </div>
                     <br>
                     <div>
                       <i></i>
                       <div>
-                        <input type="password" id="form3Example4c" />
+                        <input type="password" id="form3Example4c" name='username' />
                         <label for="form3Example4c">Create Username</label>
                       </div>
                     </div>
@@ -94,7 +125,7 @@
                     <div>
                       <i></i>
                       <div>
-                        <input type="password" id="form3Example4c" />
+                        <input type="password" id="form3Example4c" name='password' />
                         <label for="form3Example4c">Create Password</label>
                       </div>
                     </div>
@@ -102,20 +133,13 @@
                     <div>
                       <i></i>
                       <div>
-                        <input type="password" id="form3Example4cd" />
+                        <input type="password" id="form3Example4cd" name='check_password' />
                         <label for="form3Example4cd">Repeat your password</label>
                       </div>
                     </div>
                     <br>
                     <div>
-                      <input type="checkbox" value="" id="form2Example3c" />
-                      <label for="form2Example3">
-                        I agree all statements in <a href="#!">Terms of service</a>
-                      </label>
-                    </div>
-                    <br>
-                    <div>
-                      <button type="button">Register</button>
+                      <button type="submit">Register</button>
                     </div>
   
                   </form>
