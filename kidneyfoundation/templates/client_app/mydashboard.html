@@ -38,7 +38,7 @@
 {% endblock %}
 {% block content %}
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center">
+<section id="hero-dashboard" class="d-flex align-items-center">
     <div class="container">
       <h1>Track your nutritional goals</h1>
       <h2>These charts are your friend. Our goal is to help you visualize your progess, give tips for how you can reach your goals, and help you enjoy your kidney-friendly lifestyle</h2>
@@ -47,101 +47,6 @@
   </section><!-- End Hero -->
 
   <main id="main">
-
-    <!-- ======= Why Us Section ======= -->
-    <section id="why-us" class="why-us">
-      <div class="container">
-
-        <div class="row">
-          <div class="col-lg-4 d-flex align-items-stretch">
-            <div class="content">
-              <h3>Our Approach: </h3>
-              <p>
-                Our goal is to help educate, create a community of support, and provide rewards to kidney disease patients as they make lifestyle changes. We also strive to help existing patients continue to live a healthy lifestyle with those same goals!
-              </p>
-              <p>For the best experience, please create an account or login!</p>
-              <div class="text-center">
-                <a href="{% url 'index' %}" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-8 d-flex align-items-stretch">
-            <div class="icon-boxes d-flex flex-column justify-content-center">
-              <div class="row">
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-book-add"></i>
-                    <h4>Educate</h4>
-                    <p>Not a food or exercise guru? We've got your back!</p>
-                    <p>Login to your account or provide us with a few anonymous details and we can customize your kidney diet to help you reach your goals.</p>
-                  </div>
-                </div>
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-smile"></i>
-                    <h4>Support</h4>
-                    <p>Studies show that friendship makes lifestyle changes easier.</p>
-                    <p>We provide you a way to be part of a customizable community that helps you meet lifestyle goals.</p>
-                  </div>
-                </div>
-                <div class="col-xl-4 d-flex align-items-stretch">
-                  <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-donate-heart"></i>
-                    <h4>Reward</h4>
-                    <p>You should be rewarded for all your hard work!</p>
-                    <p>The more goals you achieve, the more points you receive – which can be converted into the prizes of your choice!</p>
-                  </div>
-                </div>
-              </div>
-            </div><!-- End .content-->
-          </div>
-        </div>
-
-      </div>
-    </section><!-- End Why Us Section -->
-
-    <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts">
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="count-box">
-              <i class="fas fa-heartbeat"></i>
-              <span data-purecounter-start="0" data-purecounter-end="33" data-purecounter-duration="1" class="purecounter"></span>
-              <p>% of population at high risk for kidney disease</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
-            <div class="count-box">
-              <i class="far fa-frown"></i>
-              <span data-purecounter-start="0" data-purecounter-end="90" data-purecounter-duration="1" class="purecounter"></span>
-              <p>% of kidney function that can be lost before you have symptoms</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-            <div class="count-box">
-              <i class="fas fa-walking"></i>
-              <span data-purecounter-start="0" data-purecounter-end="50" data-purecounter-duration="1" class="purecounter"></span>
-              <p>% of patients who may prevent ESRD with diet and lifestyle changes</p>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
-            <div class="count-box">
-              <i class="fas fa-dollar"></i>
-              <span data-purecounter-start="0" data-purecounter-end="9" data-purecounter-duration="1" class="purecounter"></span>
-              <p>billion dollars expected to be spent by Medicare on CKD</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Counts Section -->
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
@@ -155,7 +60,7 @@
         <div class="row">
           
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
+            <div class="icon-box-dashboard">
               <div class="icon"><i class="fas fa-chart-line"></i></div>
               <h4><a href="">MyDashboard</a></h4>
               <p>See your progress towards your daily, weekly, and monthly goals</p>
@@ -163,7 +68,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="icon-box">
+            <div class="icon-box-dashboard">
               <div class="icon"><i class="fas fa-edit"></i></div>
               <h4><a href="">MyFoodJournal</a></h4>
               <p>Keep a journal of everything you eat and we'll help you stay on track with your essential nutrients</p>
@@ -171,7 +76,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="icon-box">
+            <div class="icon-box-dashboard">
               <div class="icon"><i class="fas fa-apple-alt"></i></div>
               <h4><a href="">MyDiet</a></h4>
               <p>See what you've eaten recently and get tips for foods you might like</p>
@@ -179,7 +84,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
+            <div class="icon-box-dashboard">
               <div class="icon"><i class="fas fa-building"></i></div>
               <h4><a href="">MyCommunity</a></h4>
               <p>View and edit your support community. You have full control over your profile's interactions</p>
@@ -187,7 +92,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
+            <div class="icon-box-dashboard">
               <div class="icon"><i class="fas fa-school"></i></div>
               <h4><a href="">MyLearningCenter</a></h4>
               <p>Take a minute to learn more about kidney diseases, like CKD, and how life can be enjoyed through lifestyle changes</p>
@@ -195,7 +100,7 @@
           </div>
 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
+            <div class="icon-box-dashboard">
               <div class="icon"><i class="fas fa-house-user"></i></div>
               <h4><a href="">MyProfile</a></h4>
               <p>Manage and edit your profile. It's important to keep it up-to-date and accurate</p>
