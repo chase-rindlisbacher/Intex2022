@@ -200,7 +200,7 @@ class Report_Serum(models.Model):
     phosphorus = models.FloatField()
     sodium = models.FloatField()
     creatinine = models.FloatField()
-    Abumin = models.FloatField()
+    abumin = models.FloatField()
     blood_sugar = models.FloatField()
 
     def __str__(self):
