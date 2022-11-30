@@ -1,6 +1,9 @@
 from django.shortcuts import render, HttpResponse
 from .models import *
 import pandas as pd
+import datetime as dt
+import dateutil.relativedelta as rd
+
 
 # Create your views here.
 def indexPageView(request) :
@@ -26,22 +29,28 @@ def newAccountPageView(request) :
 
         patient = Patient()
         patient.patient = User.objects.get(first_name = request.POST.get('fname'), last_name = request.POST.get('lname'), phone = request.POST.get('phone'), email = request.POST.get('email'))
-        patient.age = request.POST.get('age')
+        today = dt.datetime.today()
+        bday = request.POST.get('bday')
+        age = rd.relativedelta(today, dt.datetime.strptime(bday, '%Y-%m-%d'))
+        patient.age = age.years
         patient.height = request.POST.get('height')
         patient.weight = request.POST.get('weight')
         patient.sex = request.POST.get('sex')
-        patient.diagnosis = request.POST.get('diagnosis')
-        patient.diagnosis_date = request.POST.get('diagnosis_date')
+        patient.diagnosis = Condition.objects.get(id=request.POST.get('diagnosis'))
         patient.birthday = request.POST.get('bday')
         patient.save()
 
         login = Patient_Login()
-        login.username = request.POST.get('username')
+        login.patient = User.objects.get(patient)
         login.password = request.POST.get('password')
         login.save()
 
+    diagnoses = Condition.objects.all()
 
-    return render(request, 'client_app/new_user.html')
+    context = {
+        'diagnoses': diagnoses
+    }
+    return render(request, 'client_app/new_user.html', context)
 
 def myMenuView(request):
     return render(request, 'client_app/mymenu.html')

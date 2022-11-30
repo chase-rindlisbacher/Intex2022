@@ -96,12 +96,10 @@
                       <br>
                       <div>
                         <label for="diagnosis">Diagnosis</label>
-                        <select id='diagnosis' required>
-                          <option>Stage 1</option>
-                          <option>Stage 2</option>
-                          <option>Stage 3</option>
-                          <option selected>Stage 4</option>
-                          <option>On Dialysis</option>
+                        <select id='diagnosis' name="diagnosis" required>
+                          {% for d in diagnoses %}
+                            <option value="{{d.id}}">{{d.name}}</option>
+                          {% endfor %}
                         </select>
                       </div>
                     </div>

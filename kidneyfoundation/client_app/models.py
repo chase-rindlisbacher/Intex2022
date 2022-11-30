@@ -69,7 +69,7 @@ class Patient(models.Model):
         db_table = 'patient'
 
 class Patient_Login(models.Model):
-    patient = models.OneToOneField(Patient, primary_key=True, on_delete=models.CASCADE)
+    patient = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
 
