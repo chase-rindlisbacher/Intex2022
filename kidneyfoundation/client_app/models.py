@@ -58,7 +58,6 @@ class Patient(models.Model):
     weight = models.IntegerField()
     sex = models.CharField(max_length=10, default='non-binary')
     diagnosis = models.ForeignKey(Condition, on_delete=models.DO_NOTHING)
-    diagnosis_date = models.DateField()
     birthday = models.DateField()
     sponsor = models.ManyToManyField(Sponsor, blank=True)
     comorbidity = models.ManyToManyField(Comorbidity, blank=True)
@@ -94,7 +93,7 @@ class Nutrient(models.Model):
     patient_target_min = models.FloatField(blank=True)
     patient_target_max = models.FloatField(blank=True)
     dialysis_target_min = models.FloatField(blank=True)
-    dialysis_taget_max = models.FloatField(blank=True)
+    dialysis_target_max = models.FloatField(blank=True)
     units = models.CharField(max_length=10)
     actively_track = models.BooleanField(default=True)
 
