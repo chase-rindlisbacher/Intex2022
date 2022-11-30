@@ -94,7 +94,7 @@ class Nutrient(models.Model):
     patient_target_min = models.FloatField(blank=True)
     patient_target_max = models.FloatField(blank=True)
     dialysis_target_min = models.FloatField(blank=True)
-    dialysis_taget_max = models.FloatField(blank=True)
+    dialysis_target_max = models.FloatField(blank=True)
     units = models.CharField(max_length=10)
     actively_track = models.BooleanField(default=True)
 
@@ -200,7 +200,7 @@ class Report_Serum(models.Model):
     phosphorus = models.FloatField()
     sodium = models.FloatField()
     creatinine = models.FloatField()
-    Abumin = models.FloatField()
+    abumin = models.FloatField()
     blood_sugar = models.FloatField()
 
     def __str__(self):
