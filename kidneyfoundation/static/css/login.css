@@ -1,0 +1,52 @@
+header {
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    text-align: center;
+    padding-top: height/2;
+    background-color: rgb(173, 173, 255);
+    height: auto;
+    font-size: 48pt;
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+.mainbody {
+background-color: aliceblue;
+}
+
+div {
+padding-left: 1%;
+padding-right: 1%;
+}
+
+p {
+font-family: "Times New Roman", Times, serif;
+text-decoration: underline;
+}
+
+footer {
+position: fixed;
+left: 0;
+right: 0;
+bottom: 0;
+width: 100%;
+background-color: rgb(173, 173, 255);
+padding-top: 1em;
+padding-bottom: 1em;
+text-align: center;
+}
+
+label.mainbody {
+font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+div.Instruction {
+font-size: 14pt;
+font-weight: bold;
+font-family: "Times New Roman", Times, serif;
+}
+
+img {
+float: right;
+width: 30%;
+padding-bottom: 25%;
+padding-right: 10%;
+}
