@@ -1142,7 +1142,7 @@ section {
 }
 
 .services .icon-box:hover {
-  background: #1977cc;
+  background: #edf7ff; /*original: #1977cc; */
   border-color: #1977cc;
 }
 
