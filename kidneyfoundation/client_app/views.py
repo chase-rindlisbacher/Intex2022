@@ -85,10 +85,12 @@ def newAccountPageView(request) :
         except:
             exists = 'Username taken. Login or create a new one'
             diagnoses = Condition.objects.all()
+            failed = True
 
             context = {
                 'success': exists,
-                'diagnoses': diagnoses
+                'diagnoses': diagnoses,
+                'failed' : failed
             }
             return render(request, 'client_app/new_user.html', context)
     diagnoses = Condition.objects.all()
