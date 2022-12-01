@@ -35,100 +35,25 @@
   </ul>
   <i class="bi bi-list mobile-nav-toggle"></i>
 </nav><!-- .navbar -->
+{% if user.is_authenticated %}
+<a href="{% url 'logout' %}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Logout</span></a>
+{% else %}
 <a href="{% url 'login' %}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span></a>
-{% endblock %}
+{% endif %}{% endblock %}
 {% block content %}
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
     <div class="container">
       <h1>Add your food and drink intake</h1>
       <h2>After you eat or drink throughout the day, add it here and we will put it towards your daily counts!</h2>
-      <a href="{% url 'login' %}" class="btn-get-started scrollto">Get Started</a>
+      <a href="{% url 'myfoodjournaladd' %}" class="btn-get-started scrollto">Add food</a>
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
     {% comment %} Food Journal Section {% endcomment %}
     <section>
-      <form name='form' method='post' action"{% url 'myfoodjournaladd' %}">
-        {% csrf_token %}
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="text" id="name" placeholder='spaghetti' name='name' required />
-                        <label for="name">Name of Item</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="text" id="desc" placeholder='has tomatoes, noodles, and meat' name='desc' required />
-                        <label for="desc">Description</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="number" id="na" placeholder='500' name='na' required />
-                        <label for="desc">Sodium (mg)</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="number" id="protein" placeholder='5' name='protein' required />
-                        <label for="protein">Protein (g)</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="number" id="k" placeholder='200' name='k' required />
-                        <label for="k">Potassium (mg)</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="number" id="phos" placeholder='200' name='phos' required />
-                        <label for="phos">Phosphorus (mg)</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="date" id="day" name='day' required />
-                        <label for="day">Date</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <label for='eating_time'>
-                        <select id='eating_time' required>
-                          <option>Breakfast</option>
-                          <option>Lunch</option>
-                          <option>Dinner</option>
-                          <option>Snack</option>
-                        </select>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="number" id="quantity" default='1' placeholder='1' name='quantity' required />
-                        <label for="quantity">Quantity</label>
-                      </div>
-                    </div>
-      </form>
+      
     </section>
 
     <!-- ======= Services Section ======= -->
