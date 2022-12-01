@@ -41,7 +41,7 @@
       <h1>Login</h1>
     
         <div>
-            <form name='form' method='post' action"{% url 'myprofile' %}" class="container">
+            <form name='form' method='post' action"{% url 'login' %}" class="container">
                 {% csrf_token %}
                 <p>{{success}}</p>
                 <div>
