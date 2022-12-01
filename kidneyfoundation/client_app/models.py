@@ -151,7 +151,7 @@ class Drink_Item(models.Model):
     fluid_type = models.ForeignKey(Fluid_Type, on_delete=models.CASCADE)
     name = models.CharField(max_length=30, default='Water')
     description = models.CharField(max_length=500)
-    units = models.ForeignKey(Food_Units, on_delete=models.DO_NOTHING)
+    units = models.ForeignKey(Drink_Units, on_delete=models.DO_NOTHING)
 
     water = models.FloatField()
     sodium = models.FloatField(blank=True)

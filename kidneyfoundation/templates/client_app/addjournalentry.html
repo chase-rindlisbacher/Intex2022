@@ -172,6 +172,126 @@
               <br>
               <button type="submit">Submit</button>
            </form>
+           <form name="drink" id="drink" class="d-none" method="post" action"{% url 'myfoodjournaladd' %}">
+            {% csrf_token %}
+              <div>
+                {% if user.is_authenticated %}
+                  <input type="text" name="drink_username" id="drink_username" value="{{user.username}}" hidden>
+                {% endif %}
+                <input type="text" name="form_type" id="form_type" value="drink" hidden>
+                <input type="text" name="drink_existing" id="drink_existing" value="exists" hidden>
+                <div id="drink_presets">
+                  <input type="text" name="combo_drink" id="combo_drink" list="drink_options">
+                  <datalist id="drink_options">
+                    {% for drink in drinks %}
+                    <option>{{drink.name}}</option>
+                    {% endfor %}
+                  </datalist>
+                  <label for="combo_drink">Choose a drink or</label>
+                  <button type="button" id="add_new_drink_button" onclick="AddNew()">Add new</button>
+                  <i></i>
+                </div>
+                <div id="drink_not_exist" class="d-none">
+                  <h5 id="drink_new_header"></h5>
+                  <div>
+                    <input type="text" id="drink_name" placeholder='water' name='drink_name' />
+                    <label for="drink_name">Name of Item</label>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="text" id="drink_desc" placeholder='optional description' />
+                      <label for="drink_desc">Description</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <select id="drink_type" name='drink_type' />
+                        <option value="" hidden selected>Choose a drink type</option>
+                        {% for type in fluid_types %}
+                          <option value="{{type.id}}">{{type.name}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  </br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="number" id="drink_na" placeholder='500' name='drink_na' step=".1" />
+                      <label for="drink_na">Sodium (mg)</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="number" id="drink_protein" placeholder='5' name='drink_protein' step=".1" />
+                      <label for="drink_protein">Protein (g)</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="number" id="drink_k" placeholder='200' name='drink_k' step=".1" />
+                      <label for="k">Potassium (mg)</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="number" id="drink_phos" placeholder='200' name='drink_phos' step=".1" />
+                      <label for="phos">Phosphorus (mg)</label>
+                    </div>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div> 
+                    <input type="date" id="drink_day" name='drink_day' required />
+                    <label for="drink_day">Date</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <select id='drink_eating_time' name="drinking_time" required>
+                      <option value="breakfast">Breakfast</option>
+                      <option value="lunch">Lunch</option>
+                      <option value="dinner">Dinner</option>
+                      <option value="snack">Snack</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <label for='drink_eating_time'>When you ate</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <input type="number" name="drink_quantity" id="drink_quantity">
+                    <label for="drink_quantity">Quantity</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <select name="drink_units" id="drink_units">
+                    {% for unit in drink_units %}
+                    <option value="{{unit.id}}">{{unit.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <br>
+              <button type="submit">Submit</button>
+           </form>
         </div>
         <br><br><br><br><br><br>
     </div>
@@ -181,11 +301,19 @@
     <script>
       function SelectInputType(that) {
         food = document.getElementById('food')
+        drink = document.getElementById('drink')
         if (that.value == 'food') {
           food.classList.remove('d-none')
+          drink.classList.add('d-none')
           document.getElementById('presets').classList.remove('d-none')
           document.getElementById('new_header').innerHTML = ''
           document.getElementById('not_exist').classList.add('d-none')
+        } else if (that.value == 'drink') {
+          food.classList.add('d-none')
+          drink.classList.remove('d-none')
+          document.getElementById('drink_presets').classList.remove('d-none')
+          document.getElementById('drink_new_header').innerHTML = ''
+          document.getElementById('drink_not_exist').classList.add('d-none')
         } else {
           food.classList.add('d-none')
           drink.classList.add('d-none')
@@ -193,10 +321,17 @@
       }
 
       function AddNew() {
-        document.getElementById('not_exist').classList.remove('d-none')
-        document.getElementById('presets').classList.add('d-none')
-        document.getElementById('new_header').innerHTML = 'Please provide this info'
-        document.getElementById('existing').value = 'no-exist'
+        if (document.getElementById('type').value == 'food') {
+          document.getElementById('not_exist').classList.remove('d-none')
+          document.getElementById('presets').classList.add('d-none')
+          document.getElementById('new_header').innerHTML = 'Please provide this info'
+          document.getElementById('existing').value = 'no-exist'
+        } else {
+          document.getElementById('drink_not_exist').classList.remove('d-none')
+          document.getElementById('drink_presets').classList.add('d-none')
+          document.getElementById('drink_new_header').innerHTML = 'Please provide this info'
+          document.getElementById('drink_existing').value = 'no-exist'
+        }
       }
     </script>
 {% endblock%}
