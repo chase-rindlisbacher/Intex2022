@@ -102,6 +102,16 @@ class Food_Units(models.Model):
     class Meta:
         db_table = 'food_units'
 
+class Drink_Units(models.Model):
+    name = models.CharField(max_length=30)
+    abbreviation = models.CharField(max_length=10)
+
+    def __str__(self):
+        return (f'{self.name}')
+    
+    class Meta:
+        db_table = 'drink_units'
+
 class Food_Type(models.Model):
     name = models.CharField(max_length=30)
 
