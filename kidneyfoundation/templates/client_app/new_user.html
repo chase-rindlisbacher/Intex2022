@@ -1,154 +1,160 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Client</title>
-  <link href="{% static 'css/login.css' %}" rel="stylesheet">
 {% block pageCSS %}
+<link href="{% static 'css/our.css' %}" rel="stylesheet">
 {% endblock %}
-</head>
-<body>
-  
-  <section style="background-color: #eee;">
-    <div>
-      <div>
+{% block navigation %}
+<nav id="navbar" class="navbar order-last order-lg-0">
+  <ul>
+    <li><a class="nav-link scrollto" href="{% url 'index' %}">Home</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'mydashboard' %}">MyDashboard</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'myfoodjournal' %}">MyFoodJournal</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'mymenu' %}">MyMenu</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'mycommunity' %}">MyCommunity</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'index' %}">MyLearningCenter</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'myprofile' %}">MyProfile</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'index'  %}#faq">FAQ</a></li>
+    <!-- Keep but don't use right now 
+    <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+      <ul>
+        <li><a href="#">Drop Down 1</a></li>
+        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+          <ul>
+            <li><a href="#">Deep Drop Down 1</a></li>
+            <li><a href="#">Deep Drop Down 2</a></li>
+            <li><a href="#">Deep Drop Down 3</a></li>
+            <li><a href="#">Deep Drop Down 4</a></li>
+            <li><a href="#">Deep Drop Down 5</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Drop Down 2</a></li>
+        <li><a href="#">Drop Down 3</a></li>
+        <li><a href="#">Drop Down 4</a></li>
+      </ul>
+    </li>-->
+  </ul>
+  <i class="bi bi-list mobile-nav-toggle"></i>
+</nav><!-- .navbar -->
+<a href="{% url 'login' %}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span></a>
+{% endblock %}
+{% block content %}
+    <div class="container" style="margin-top: 25vh">
+      <h1>Signup</h1>
+    
         <div>
-          <div style="border-radius: 25px;">
-            <div>
-              <div>
-                <div class='Instruction'>
-  
-                  <h1>Sign up</h1>
-  
-                  <form name='form' method='post' action"{% url 'new_user' %}">
-                    {% csrf_token %}
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="text" id="fname" placeholder='John' name='fname' required />
-                        <label for="form3Example1c">First Name</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="text" id="lname" placeholder='Doe' name='lname' required />
-                        <label for="form3Example1c">Last Name</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="number" id="height" placeholder='72' name='height' required />
-                        <label for="form3Example1c">Your Height (in.)</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="number" id="weight" placeholder='185' name='weight' required />
-                        <label for="form3Example1c">Your Weight (lbs)</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="date" id="bday" name='bday' required />
-                        <label for="form3Example1c">Your Birthday</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="radio" id="sex" placeholder='185' name="sex" value='male' selected />
-                        <label for="form3Example1c">Male</label>
-                        <input type="radio" id="sex" placeholder='185' name='sex' value='female' />
-                        <label for="form3Example1c">Female</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="email" id="email" placeholder='example@email.com' name='email' required />
-                        <label for="email">Your Email</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <br>
-                      <div>
-                        <i></i>
-                        <div>
-                          <input type="tel" id="phone" name='phone' pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength='12' required />
-                          <label for="form3Example1c">Phone Number</label> <br>
-                          <small>Format: 123-456-7890</small>
-                        </div>
-                      </div>
-                      <i></i>
-                      <br>
-                      <div>
-                        <label for="diagnosis">Diagnosis</label>
-                        <select id='diagnosis' name="diagnosis" required>
-                          {% for d in diagnoses %}
-                            <option value="{{d.id}}">{{d.name}}</option>
-                          {% endfor %}
-                        </select>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="text" id="form3Example4c" name='username' maxlength='30' required />
-                        <label for="form3Example4c">Create Username</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="password" id="form3Example4c" name='password' maxlength='30' required />
-                        <label for="form3Example4c">Create Password</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <i></i>
-                      <div>
-                        <input type="password" id="form3Example4cd" name='check_password' required />
-                        <label for="form3Example4cd">Repeat your password</label>
-                      </div>
-                    </div>
-                    <br>
-                    <div>
-                      <button type="submit">Register</button>
-                    </div>
-  
-                  </form>
-  
-                </div>
+            <form name='form' method='post' action"{% url 'new_user' %}">
+                {% csrf_token %}
                 <div>
-  
-                  {% comment %} <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
-                     alt="Sample image"> {% endcomment %}
-  
+                  <i></i>
+                  <div>
+                    <input type="text" id="fname" placeholder='John' name='fname' required />
+                    <label for="form3Example1c">First Name</label>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <input type="text" id="lname" placeholder='Doe' name='lname' required />
+                    <label for="form3Example1c">Last Name</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <input type="number" id="height" placeholder='72' name='height' required />
+                    <label for="form3Example1c">Your Height (in.)</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <input type="number" id="weight" placeholder='185' name='weight' required />
+                    <label for="form3Example1c">Your Weight (lbs)</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <input type="date" id="bday" name='bday' required />
+                    <label for="form3Example1c">Your Birthday</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <input type="radio" id="sex" placeholder='185' name="sex" value='male' selected />
+                    <label for="form3Example1c">Male</label>
+                    <input type="radio" id="sex" placeholder='185' name='sex' value='female' />
+                    <label for="form3Example1c">Female</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <input type="email" id="email" placeholder='example@email.com' name='email' required />
+                    <label for="email">Your Email</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="tel" id="phone" name='phone' pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" maxlength='12' required />
+                      <label for="form3Example1c">Phone Number</label> <br>
+                      <small>Format: 123-456-7890</small>
+                    </div>
+                  </div>
+                  <i></i>
+                  <br>
+                  <div>
+                    <label for="diagnosis">Diagnosis</label>
+                    <select id='diagnosis' name="diagnosis" required>
+                      {% for d in diagnoses %}
+                        <option value="{{d.id}}">{{d.name}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <input type="text" id="form3Example4c" name='username' maxlength='30' required />
+                    <label for="form3Example4c">Create Username</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <input type="password" id="form3Example4c" name='password' maxlength='30' required />
+                    <label for="form3Example4c">Create Password</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <i></i>
+                  <div>
+                    <input type="password" id="form3Example4cd" name='check_password' required />
+                    <label for="form3Example4cd">Repeat your password</label>
+                  </div>
+                </div>
+                <br>
+                <div>
+                  <button type="submit">Register</button>
+                </div>
 
-</body>
-</html>
+              </form>
+        </div>
+        <br>
+    </div>
+
+{% endblock %}
