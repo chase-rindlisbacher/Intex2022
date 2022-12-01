@@ -140,9 +140,9 @@ def myFoodJournalAdd(request):
                 posted_date = request.POST.get('day')
                 new_food = Food_Item()
                 new_food.food_type = Food_Type.objects.get(id = int(request.POST.get('food_type')))
-                new_food.name = request.POST.get('name')
-                new_food.description = request.POST.get('desc')
-                new_food.units = Food_Units(id=request.POST.get('units'))
+                new_food.name = request.POST.get('name').lower()
+                new_food.description = request.POST.get('desc').lower()
+                new_food.units = Food_Units.objects.get(id=request.POST.get('units'))
                 new_food.sodium = float(request.POST.get('na'))
                 new_food.protein = float(request.POST.get('protein'))
                 new_food.potassium = float(request.POST.get('k'))
@@ -154,7 +154,7 @@ def myFoodJournalAdd(request):
                 food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
                 food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
                 food_entry.eating_time = request.POST.get('eating_time')
-                food_entry.units_count = request.POST.get('quantity')
+                food_entry.units_count = float(request.POST.get('quantity'))
                 food_entry.food = Food_Item.objects.get(name = request.POST.get('name'))
                 food_entry.save()
 
@@ -171,20 +171,56 @@ def myFoodJournalAdd(request):
                 food_entry.units_count = float(request.POST.get('quantity'))
                 food_entry.save()
         else:
-            return None
+            if (request.POST.get('drink_existing') == 'no-exist'):
+                post_date = request.POST.get('drink_day')
+
+                new_drink = Drink_Item()
+                new_drink.name = request.POST.get('drink_name').lower()
+                new_drink.description = request.POST.get('drink_desc').lower()
+                new_drink.fluid_type = Fluid_Type.objects.get(id=request.POST.get('drink_type'))
+                new_drink.units = Drink_Units.objects.get(id=request.POST.get('drink_units'))
+                new_drink.water = request.POST.get('drink_quantity')
+                new_drink.sodium = request.POST.get('drink_na')
+                new_drink.protein = request.POST.get('drink_protein')
+                new_drink.potassium = request.POST.get('drink_k')
+                new_drink.phosphorus = request.POST.get('drink_phos')
+
+                new_drink.save()
+
+                drink_entry = Report_Drink()
+                drink_entry.drink = Drink_Item.objects.get(name = request.POST.get('drink_name'))
+                drink_entry.username = request.POST.get('drink_username')
+                drink_entry.patient = Patient.objects.get(username = request.POST.get('drink_username'))
+                drink_entry.date = dt.datetime.strptime(post_date, '%Y-%m-%d')
+                drink_entry.eating_time = request.POST.get('drinking_time')
+                drink_entry.units_count = float(request.POST.get('drink_quantity'))
+                drink_entry.save()
+            else:
+                post_date = request.POST.get('drink_day')
+                drink_entry = Report_Drink()
+                drink = Drink_Item.objects.get(name = request.POST.get('combo_drink'))
+                drink_entry.drink = drink
+                drink_entry.date = dt.datetime.strptime(post_date, '%Y-%m-%d')
+                drink_entry.username = request.POST.get('drink_username')
+                drink_entry.patient = Patient.objects.get(username = request.POST.get('drink_username'))
+                drink_entry.eating_time = request.POST.get('drinking_time')
+                drink_entry.units_count = float(request.POST.get('drink_quantity'))
+                drink_entry.save()
 
     foods = Food_Item.objects.all()
     food_types = Food_Type.objects.all()
     drinks = Drink_Item.objects.all()
     fluid_types = Fluid_Type.objects.all()
     food_units = Food_Units.objects.all()
+    fluid_units = Drink_Units.objects.all()
 
     context = {
         'foods': foods,
         'food_types': food_types,
         'drinks': drinks,
         'fluid_types': fluid_types,
-        'food_units': food_units
+        'food_units': food_units,
+        'drink_units': fluid_units
     }
 
     return render(request, 'client_app/addjournalentry.html', context)
