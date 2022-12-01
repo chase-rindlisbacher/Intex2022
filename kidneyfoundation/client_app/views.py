@@ -56,7 +56,7 @@ def newAccountPageView(request) :
         login.password = request.POST.get('password')
         login.save()
 
-        return redirect('index', user=user)
+        return redirect('index')
     else:
         diagnoses = Condition.objects.all()
 
