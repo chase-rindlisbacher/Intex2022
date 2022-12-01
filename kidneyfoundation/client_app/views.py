@@ -86,10 +86,12 @@ def newAccountPageView(request) :
         except:
             exists = 'Username taken. Login or create a new one'
             diagnoses = Condition.objects.all()
+            failed = True
 
             context = {
                 'success': exists,
-                'diagnoses': diagnoses
+                'diagnoses': diagnoses,
+                'failed' : failed
             }
             return render(request, 'client_app/new_user.html', context)
     diagnoses = Condition.objects.all()
@@ -135,11 +137,22 @@ def myFoodJournalView(request):
 def myFoodJournalAdd(request):
     if (request.method == 'POST'):
         if (request.POST.get('form_type') == 'food'):
-            food_entry = Report_Food()
-            food_entry.username = request.POST.get('username')
-            food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
-            food_entry.date = request.POST.get('date')
-            food_entry.eating_time = request.POST.get('eating_time')
+            if (request.POST.get('existing') == 'no-exist'):
+                food_entry = Report_Food()
+                food_entry.username = request.POST.get('username')
+                food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
+                food_entry.date = request.POST.get('date')
+                food_entry.eating_time = request.POST.get('eating_time')
+                food_entry.units_count = request.POST.get('units')
+                food_entry.food = Food_Item.objects.get(name = request.POST.get('name'))
+
+            else:
+                food_entry = Report_Food()
+                food = Food_Item.objects.get(name = request.POST.get('combo_food'))
+                food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
+
+
+
     foods = Food_Item.objects.all()
     food_types = Food_Type.objects.all()
     drinks = Drink_Item.objects.all()
