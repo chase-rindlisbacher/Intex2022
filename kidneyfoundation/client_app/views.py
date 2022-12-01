@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect
 from .models import *
 import pandas as pd
 import datetime as dt
@@ -12,15 +12,25 @@ def indexPageView(request) :
     context = {
         'nutrients': nutrients
     }
-
     return render(request, 'client_app/index.html', context)
 
 def loginPageView(request) :
-    return render(request, 'client_app/login.html')
+    uname = request.POST.get('username')
+    pword = request.POST.get('password')
+
+    try:
+        user = Patient_Login.objects.get(username=uname, password = pword)
+        return redirect('index')
+    except:
+        context = {
+            'success': 'Login failed. Enter correct info, or create an account.'
+        }
+        return render(request, 'client_app/login.html', context)
 
 def newAccountPageView(request) :
     if (request.method == 'POST'):
         user = User()
+        n = request.POST.get('fname')
         user.first_name = request.POST.get('fname')
         user.last_name = request.POST.get('lname')
         user.phone = request.POST.get('phone')
@@ -41,16 +51,19 @@ def newAccountPageView(request) :
         patient.save()
 
         login = Patient_Login()
-        login.patient = User.objects.get(patient)
+        login.patient = User.objects.get(first_name = request.POST.get('fname'), last_name = request.POST.get('lname'), phone = request.POST.get('phone'), email = request.POST.get('email'))
+        login.username = request.POST.get('username')
         login.password = request.POST.get('password')
         login.save()
 
-    diagnoses = Condition.objects.all()
+        return redirect('index', user=user)
+    else:
+        diagnoses = Condition.objects.all()
 
-    context = {
-        'diagnoses': diagnoses
-    }
-    return render(request, 'client_app/new_user.html', context)
+        context = {
+            'diagnoses': diagnoses
+        }
+        return render(request, 'client_app/new_user.html', context)
 
 def myMenuView(request):
     return render(request, 'client_app/mymenu.html')
