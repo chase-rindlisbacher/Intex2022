@@ -173,12 +173,20 @@ def myDashboardView(request):
     mg_nutrients = Nutrient.objects.filter(units='mg', frequency='daily')
     g_nutrients = Nutrient.objects.filter(units='g/kg bd wt', frequency='daily')
     L_day = Nutrient.objects.filter(units='L/day', frequency='daily')
-    context = {
-        'mg_nutrients': mg_nutrients,
-        'g_nutrients': g_nutrients,
-        'L_day' : L_day,
-    }
-
+    if request.user.is_authenticated:
+        try:
+            username = request.user.get_username()
+            sq1 = Report_Food.objects.raw(f'SELECT * FROM report_food WHERE username={username}')
+            sq2 = Report_Food.objects.raw(f'SELECT * FROM report_drink WHERE username={username}')
+            ungrouped = sq1.objects.raw(f'SELECT * FROM {sq1} INNER JOIN {sq2} ON {sq1}.username = {sq2}.username')
+            ungrouped.objects.raw(f'SELECT ')
+            pass
+        except:
+            context = {
+            'mg_nutrients': mg_nutrients,
+            'g_nutrients': g_nutrients,
+            'L_day' : L_day,
+            }
     return render(request, 'client_app/mydashboard.html', context)
 
 def myProfileView(request):
