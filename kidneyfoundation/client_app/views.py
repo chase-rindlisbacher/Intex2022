@@ -87,9 +87,9 @@ def myFoodJournalAdd(request):
 
 def myDashboardView(request):
     mg_nutrients = Nutrient.objects.filter(units='mg', frequency='daily')
-
+    
     context = {
-        'mg_nutrients': mg_nutrients
+        'mg_nutrients': mg_nutrients,
     }
 
     return render(request, 'client_app/mydashboard.html', context)
