@@ -478,6 +478,11 @@ h6 {
   margin-top: -80px;
 }
 
+#hero.antihero {
+  margin-top: 15vh!important;
+  margin-bottom: 0!important;
+}
+
 #hero .container {
   position: relative;
 }
@@ -558,8 +563,17 @@ h6 {
   background-size: cover;
   margin-top: -80px;
 }
+#hero-create {
+  width: 100%;
+  background-color: #f1f7fd;
+  background-size: cover;
+  margin-top: -80px;
+}
 
 #hero-dashboard .container {
+  position: relative;
+}
+#hero-create .container {
   position: relative;
 }
 
@@ -571,8 +585,21 @@ h6 {
   text-transform: uppercase;
   color: #2c4964;
 }
+#hero-create h1 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  text-transform: uppercase;
+  color: #2c4964;
+}
 
 #hero-dashboard h2 {
+  color: #2c4964;
+  margin: 10px 0 0 0;
+  font-size: 24px;
+}
+#hero-create h2 {
   color: #2c4964;
   margin: 10px 0 0 0;
   font-size: 24px;
@@ -592,13 +619,35 @@ h6 {
   color: #fff;
   background: #1977cc;
 }
+#hero-create .btn-get-started {
+  font-family: "Raleway", sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 12px 35px;
+  margin-top: 30px;
+  border-radius: 50px;
+  transition: 0.5s;
+  color: #fff;
+  background: #1977cc;
+}
 
 #hero-dashboard .btn-get-started:hover {
+  background: #3291e6;
+}
+#hero-create .btn-get-started:hover {
   background: #3291e6;
 }
 
 @media (min-width: 1024px) {
   #hero-dashboard {
+    background-attachment: fixed;
+  }
+}
+@media (min-width: 1024px) {
+  #hero-create {
     background-attachment: fixed;
   }
 }
@@ -608,12 +657,23 @@ h6 {
     margin-bottom: 0;
     height: 100vh;
   }
+  #hero-create {
+    margin-bottom: 0;
+    height: 100vh;
+  }
 
   #hero-dashboard .container {
     padding-bottom: 63px;
   }
+  #hero-create .container {
+    padding-bottom: 63px;
+  }
 
   #hero-dashboard h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero-create h1 {
     font-size: 28px;
     line-height: 36px;
   }
@@ -623,11 +683,19 @@ h6 {
     line-height: 24px;
     margin-bottom: 30px;
   }
+  #hero-create form {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
 }
 
 
 @media (max-height: 600px) {
   #hero-dashboard {
+    height: 110vh;
+  }
+  #hero-create {
     height: 110vh;
   }
 }
