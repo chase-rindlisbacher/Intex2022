@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'client_app.apps.ClientAppConfig',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'kidneys',
         'USER': 'postgres',
-        'PASSWORD': 'joRdaN23#1', 
+        'PASSWORD': 'P@55w0rd', 
         'HOST': 'localhost'
     }
 }
