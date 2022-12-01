@@ -104,7 +104,6 @@ class Food_Units(models.Model):
 
 class Food_Type(models.Model):
     name = models.CharField(max_length=30)
-    units = models.ForeignKey(Food_Units, on_delete=models.CASCADE)
 
     def __str__(self):
         return (f'{self.name}')
@@ -114,7 +113,6 @@ class Food_Type(models.Model):
 
 class Fluid_Type(models.Model):
     name = models.CharField(max_length=30)
-    units = models.ForeignKey(Food_Units, on_delete=models.CASCADE)
 
     def __str__(self):
         return (f'{self.name}')

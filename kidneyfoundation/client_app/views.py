@@ -116,10 +116,45 @@ def myMenuAdd(request):
     return render(request, 'client_app/addfoods.html')
 
 def myFoodJournalView(request):
-    return render(request, 'client_app/myfoodjournal.html')
+    if request.user.is_authenticated:
+        try:
+            foods = Report_Food.objects.get(username = request.user.get_username())
+            drinks = Report_Drink.objects.get(username = request.user.get_username())
+
+            context = {
+                'foods': foods,
+                'drinks': drinks
+            }
+
+            return render(request, 'client_app/myfoodjournal.html', context)
+        except:
+            return render(request, 'client_app/myfoodjournal.html')
+    else:
+        return redirect('login')
 
 def myFoodJournalAdd(request):
-    return render(request, 'client_app/addjournalentry.html')
+    if (request.method == 'POST'):
+        if (request.POST.get('form_type') == 'food'):
+            food_entry = Report_Food()
+            food_entry.username = request.POST.get('username')
+            food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
+            food_entry.date = request.POST.get('date')
+            food_entry.eating_time = request.POST.get('eating_time')
+    foods = Food_Item.objects.all()
+    food_types = Food_Type.objects.all()
+    drinks = Drink_Item.objects.all()
+    fluid_types = Fluid_Type.objects.all()
+    food_units = Food_Units.objects.all()
+
+    context = {
+        'foods': foods,
+        'food_types': food_types,
+        'drinks': drinks,
+        'fluid_types': fluid_types,
+        'food_units': food_units
+    }
+
+    return render(request, 'client_app/addjournalentry.html', context)
 
 def myDashboardView(request):
     mg_nutrients = Nutrient.objects.filter(units='mg', frequency='daily')
