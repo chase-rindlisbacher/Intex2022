@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth import authenticate
+import pandas as pd
 
 
 # Create your views here.
@@ -122,9 +123,12 @@ def myFoodJournalAdd(request):
 
 def myDashboardView(request):
     mg_nutrients = Nutrient.objects.filter(units='mg', frequency='daily')
-    
+    g_nutrients = Nutrient.objects.filter(units='g/kg bd wt', frequency='daily')
+    L_day = Nutrient.objects.filter(units='L/day', frequency='daily')
     context = {
         'mg_nutrients': mg_nutrients,
+        'g_nutrients': g_nutrients,
+        'L_day' : L_day,
     }
 
     return render(request, 'client_app/mydashboard.html', context)
