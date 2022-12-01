@@ -90,7 +90,19 @@
                   <div>
                     <i></i>
                     <div>
-                      <input type="number" id="na" placeholder='500' name='na' />
+                      <select id="food_type" name='food_type' />
+                        <option value="" hidden selected>Choose a food type</option>
+                        {% for type in food_types %}
+                          <option value="{{type.id}}">{{type.name}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  </br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="number" id="na" placeholder='500' name='na' step=".1" />
                       <label for="desc">Sodium (mg)</label>
                     </div>
                   </div>
@@ -98,7 +110,7 @@
                   <div>
                     <i></i>
                     <div>
-                      <input type="number" id="protein" placeholder='5' name='protein' />
+                      <input type="number" id="protein" placeholder='5' name='protein' step=".1" />
                       <label for="protein">Protein (g)</label>
                     </div>
                   </div>
@@ -106,7 +118,7 @@
                   <div>
                     <i></i>
                     <div>
-                      <input type="number" id="k" placeholder='200' name='k' />
+                      <input type="number" id="k" placeholder='200' name='k' step=".1" />
                       <label for="k">Potassium (mg)</label>
                     </div>
                   </div>
@@ -114,7 +126,7 @@
                   <div>
                     <i></i>
                     <div>
-                      <input type="number" id="phos" placeholder='200' name='phos' />
+                      <input type="number" id="phos" placeholder='200' name='phos' step=".1" />
                       <label for="phos">Phosphorus (mg)</label>
                     </div>
                   </div>
@@ -131,11 +143,11 @@
                 <div>
                   <i></i>
                   <div>
-                    <select id='eating_time' required>
-                      <option>Breakfast</option>
-                      <option>Lunch</option>
-                      <option>Dinner</option>
-                      <option>Snack</option>
+                    <select id='eating_time' name="eating_time" required>
+                      <option value="breakfast">Breakfast</option>
+                      <option value="lunch">Lunch</option>
+                      <option value="dinner">Dinner</option>
+                      <option value="snack">Snack</option>
                     </select>
                     <label for='eating_time'>When you ate</label>
                   </div>
@@ -160,7 +172,7 @@
                 <div>
                   <select name="units" id="units">
                     {% for unit in food_units %}
-                    <option value="{{unit.abbreviation}}">{{unit.name}}</option>
+                    <option value="{{unit.id}}">{{unit.name}}</option>
                     {% endfor %}
                   </select>
                 </div>
@@ -182,9 +194,9 @@
           document.getElementById('presets').classList.remove('d-none')
           document.getElementById('new_header').innerHTML = ''
           document.getElementById('not_exist').classList.add('d-none')
-
         } else {
           food.classList.add('d-none')
+          drink.classList.add('d-none')
         }
       }
 
