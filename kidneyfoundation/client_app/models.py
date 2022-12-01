@@ -159,6 +159,7 @@ class Drink_Item(models.Model):
 
 class Report_Food(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    username = models.CharField(max_length=150, default='')
     date = models.DateTimeField()
     eating_time = models.CharField(max_length=10, default='Snack')
     units_count = models.FloatField()
@@ -169,6 +170,7 @@ class Report_Food(models.Model):
 
 class Report_Drink(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    username = models.CharField(max_length=150, default='')
     date = models.DateTimeField()
     eating_time = models.CharField(max_length=10, default='Snack')
     units_count = models.FloatField()
@@ -179,6 +181,7 @@ class Report_Drink(models.Model):
 
 class Report_Serum(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    username = models.CharField(max_length=150, default='')
     date = models.DateTimeField()
     
     potassium = models.FloatField()
