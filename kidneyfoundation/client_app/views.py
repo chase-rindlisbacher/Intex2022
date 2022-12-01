@@ -135,20 +135,41 @@ def myFoodJournalAdd(request):
     if (request.method == 'POST'):
         if (request.POST.get('form_type') == 'food'):
             if (request.POST.get('existing') == 'no-exist'):
+                posted_date = request.POST.get('day')
+                new_food = Food_Item()
+                new_food.food_type = Food_Type.objects.get(id = int(request.POST.get('food_type')))
+                new_food.name = request.POST.get('name')
+                new_food.description = request.POST.get('desc')
+                new_food.units = Food_Units(id=request.POST.get('units'))
+                new_food.sodium = float(request.POST.get('na'))
+                new_food.protein = float(request.POST.get('protein'))
+                new_food.potassium = float(request.POST.get('k'))
+                new_food.phosphorus = float(request.POST.get('phos'))
+                new_food.save()
+
                 food_entry = Report_Food()
                 food_entry.username = request.POST.get('username')
                 food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
-                food_entry.date = request.POST.get('date')
+                food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
                 food_entry.eating_time = request.POST.get('eating_time')
                 food_entry.units_count = request.POST.get('units')
                 food_entry.food = Food_Item.objects.get(name = request.POST.get('name'))
+                food_entry.save()
 
             else:
+                posted_date = request.POST.get('day')
                 food_entry = Report_Food()
                 food = Food_Item.objects.get(name = request.POST.get('combo_food'))
                 food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
-
-
+                food_entry.food = food
+                food_entry.username = request.POST.get('username')
+                food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
+                food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
+                food_entry.eating_time = request.POST.get('eating_time')
+                food_entry.units_count = float(request.POST.get('units'))
+                food_entry.save()
+        else:
+            return None
 
     foods = Food_Item.objects.all()
     food_types = Food_Type.objects.all()
