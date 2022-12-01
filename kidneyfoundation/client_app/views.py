@@ -134,11 +134,22 @@ def myFoodJournalView(request):
 def myFoodJournalAdd(request):
     if (request.method == 'POST'):
         if (request.POST.get('form_type') == 'food'):
-            food_entry = Report_Food()
-            food_entry.username = request.POST.get('username')
-            food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
-            food_entry.date = request.POST.get('date')
-            food_entry.eating_time = request.POST.get('eating_time')
+            if (request.POST.get('existing') == 'no-exist'):
+                food_entry = Report_Food()
+                food_entry.username = request.POST.get('username')
+                food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
+                food_entry.date = request.POST.get('date')
+                food_entry.eating_time = request.POST.get('eating_time')
+                food_entry.units_count = request.POST.get('units')
+                food_entry.food = Food_Item.objects.get(name = request.POST.get('name'))
+
+            else:
+                food_entry = Report_Food()
+                food = Food_Item.objects.get(name = request.POST.get('combo_food'))
+                food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
+
+
+
     foods = Food_Item.objects.all()
     food_types = Food_Type.objects.all()
     drinks = Drink_Item.objects.all()
