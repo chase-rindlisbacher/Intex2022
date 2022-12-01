@@ -176,7 +176,7 @@ def myDashboardView(request):
     if request.user.is_authenticated:
         try:
             username = request.user.get_username()
-            sq_food = Report_Food.objects.raw(f'')
+            sq_food = Report_Food.objects.raw(f'SELECT ')
             sq1 = Report_Food.objects.raw(f'SELECT * FROM report_food WHERE username={username}')
             sq2 = Report_Food.objects.raw(f'SELECT * FROM report_drink WHERE username={username}')
             ungrouped = sq1.objects.raw(f'SELECT * FROM {sq1} INNER JOIN {sq2} ON {sq1}.username = {sq2}.username')
