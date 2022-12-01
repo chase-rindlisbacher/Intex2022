@@ -154,7 +154,7 @@ def myFoodJournalAdd(request):
                 food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
                 food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
                 food_entry.eating_time = request.POST.get('eating_time')
-                food_entry.units_count = request.POST.get('units')
+                food_entry.units_count = request.POST.get('quantity')
                 food_entry.food = Food_Item.objects.get(name = request.POST.get('name'))
                 food_entry.save()
 
@@ -168,7 +168,7 @@ def myFoodJournalAdd(request):
                 food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
                 food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
                 food_entry.eating_time = request.POST.get('eating_time')
-                food_entry.units_count = float(request.POST.get('units'))
+                food_entry.units_count = float(request.POST.get('quantity'))
                 food_entry.save()
         else:
             return None
