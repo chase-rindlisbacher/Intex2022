@@ -49,7 +49,85 @@
   <main id="main">
     {% comment %} Food Journal Section {% endcomment %}
     <section>
-      
+      <form name='form' method='post' action"{% url 'myfoodjournaladd' %}">
+        {% csrf_token %}
+                    <div>
+                      <i></i>
+                      <div>
+                        <input type="text" id="name" placeholder='spaghetti' name='name' required />
+                        <label for="name">Name of Item</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <i></i>
+                      <div>
+                        <input type="text" id="desc" placeholder='has tomatoes, noodles, and meat' name='desc' required />
+                        <label for="desc">Description</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <i></i>
+                      <div>
+                        <input type="number" id="na" placeholder='500' name='na' required />
+                        <label for="desc">Sodium (mg)</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <i></i>
+                      <div>
+                        <input type="number" id="protein" placeholder='5' name='protein' required />
+                        <label for="protein">Protein (g)</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <i></i>
+                      <div>
+                        <input type="number" id="k" placeholder='200' name='k' required />
+                        <label for="k">Potassium (mg)</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <i></i>
+                      <div>
+                        <input type="number" id="phos" placeholder='' name='phos' required />
+                        <label for="phos">Phosphorus (mg)</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <i></i>
+                      <div>
+                        <input type="date" id="day" default='' name='day' required />
+                        <label for="day">Date</label>
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <i></i>
+                      <div>
+                        <label for='eating_time'>
+                        <select id='eating_time' required>
+                          <option>Breakfast</option>
+                          <option>Lunch</option>
+                          <option>Dinner</option>
+                          <option>Snack</option>
+                        </select>
+                      </div>
+                    </div>
+                    <br>
+                    <div>
+                      <i></i>
+                      <div>
+                        <input type="number" id="quantity" default='1' name='quantity' required />
+                        <label for="quantity">Quantity</label>
+                      </div>
+                    </div>
+      </form>
     </section>
 
     <!-- ======= Services Section ======= -->
