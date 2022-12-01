@@ -50,66 +50,86 @@
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
-      <div class="container">
+      <center>
+        <div class="container">
 
-        <div class="section-title">
-          <h2>Services</h2>
-          <p>To help you achieve your wellbeing goals, we're happy to offer 6 services</p>
+          <div class="section-title">
+            <h2>Services</h2>
+            <p>To help you achieve your wellbeing goals, we're happy to offer 6 services</p>
+          </div>
+
+          <div class="row">
+            
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+              <div class="icon-box-dashboard container">
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
+                  <canvas id="chart" width="250" height="250"></canvas>
+                  <script>
+                    let ctx = document.getElementById("chart").getContext("2d");
+                    let chart = new Chart(ctx, {
+                      type: "radar",
+                      data: {
+                        labels: [
+                          "potassium",
+                          "phospherus",
+                          "sodium",
+                        ],
+                        datasets: [
+                          {
+                            label: "Potassium",
+                            data: [65, 59, 90, 81, 56, 55, 40],
+                            fill: true,
+                            backgroundColor: "rgba(255, 99, 132, 0.2)",
+                            borderColor: "rgb(255, 99, 132)",
+                            pointBackgroundColor: "rgb(255, 99, 132)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgb(255, 99, 132)",
+                          },
+                          {
+                            label: "My Second Dataset",
+                            data: [28, 48, 40, 19, 96, 27, 100],
+                            fill: true,
+                            backgroundColor: "rgba(54, 162, 235, 0.2)",
+                            borderColor: "rgb(54, 162, 235)",
+                            pointBackgroundColor: "rgb(54, 162, 235)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgb(54, 162, 235)",
+                          },
+                          {
+                            label: "My Third Dataset",
+                            data: [30, 60, 23, 38, 12, 74, 100],
+                            fill: true,
+                            backgroundColor: "rgba(48, 237, 41, 0.2)",
+                            borderColor: "rgb(48, 237, 41)",
+                            pointBackgroundColor: "rgb(48, 237, 41)",
+                            pointBorderColor: "#fff",
+                            pointHoverBackgroundColor: "#fff",
+                            pointHoverBorderColor: "rgb(48, 237, 41)",
+                          },
+                        ],
+                      },
+                      options: {
+                        responsive: true,
+                      },
+                    });
+                  </script>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
+              <div class="icon-box-dashboard container">
+                <div class="icon"><i class="fas fa-apple-alt"></i></div>
+                <h4><a href="">MyDiet</a></h4>
+                <p>See what you've eaten recently and get tips for foods you might like</p>
+              </div>
+            </div>
+
+          </div>
         </div>
-
-        <div class="row">
-          
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box-dashboard">
-              <div class="icon"><i class="fas fa-chart-line"></i></div>
-              <h4><a href="">MyDashboard</a></h4>
-              <p>See your progress towards your daily, weekly, and monthly goals</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="icon-box-dashboard">
-              <div class="icon"><i class="fas fa-edit"></i></div>
-              <h4><a href="">MyFoodJournal</a></h4>
-              <p>Keep a journal of everything you eat and we'll help you stay on track with your essential nutrients</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="icon-box-dashboard">
-              <div class="icon"><i class="fas fa-apple-alt"></i></div>
-              <h4><a href="">MyDiet</a></h4>
-              <p>See what you've eaten recently and get tips for foods you might like</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box-dashboard">
-              <div class="icon"><i class="fas fa-building"></i></div>
-              <h4><a href="">MyCommunity</a></h4>
-              <p>View and edit your support community. You have full control over your profile's interactions</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box-dashboard">
-              <div class="icon"><i class="fas fa-school"></i></div>
-              <h4><a href="">MyLearningCenter</a></h4>
-              <p>Take a minute to learn more about kidney diseases, like CKD, and how life can be enjoyed through lifestyle changes</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box-dashboard">
-              <div class="icon"><i class="fas fa-house-user"></i></div>
-              <h4><a href="">MyProfile</a></h4>
-              <p>Manage and edit your profile. It's important to keep it up-to-date and accurate</p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
+      </center>
     </section>
     <!-- End Services Section -->
 

@@ -58,7 +58,6 @@ class Patient(models.Model):
     weight = models.IntegerField()
     sex = models.CharField(max_length=10, default='non-binary')
     diagnosis = models.ForeignKey(Condition, on_delete=models.DO_NOTHING)
-    diagnosis_date = models.DateField()
     birthday = models.DateField()
     sponsor = models.ManyToManyField(Sponsor, blank=True)
     comorbidity = models.ManyToManyField(Comorbidity, blank=True)
@@ -70,7 +69,7 @@ class Patient(models.Model):
         db_table = 'patient'
 
 class Patient_Login(models.Model):
-    patient = models.OneToOneField(Patient, primary_key=True, on_delete=models.CASCADE)
+    patient = models.OneToOneField(User, primary_key=True, on_delete=models.CASCADE)
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=30)
 

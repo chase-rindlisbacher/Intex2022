@@ -24,16 +24,18 @@
                   <p>Login</p>
   
                   <form name='form' method='post' action"{% url 'myprofile' %}">
-                      <div>
-                        <input type="password" id="form3Example4c" />
-                        <label for="form3Example4c">Username</label>
-                      </div>
+                    {% csrf_token %}
+                    <p>{{success}}</p>
+                    <div>
+                      <input type="text" id="form3Example4c" name="username" required />
+                      <label for="form3Example4c">Username</label>
+                    </div>
                     </div>
                     <br>
                     <div>
                       <i></i>
                       <div>
-                        <input type="password" id="form3Example4cd" />
+                        <input type="password" id="form3Example4cd" name="password" required />
                         <label for="form3Example4cd">Password</label>
                       </div>
                     </div>
