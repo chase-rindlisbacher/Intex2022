@@ -127,7 +127,7 @@
               "potassium",
               "phosphorus",],
               datasets: [{
-                  label: 'Sodium',
+                  label: 'Sodium (mg)',
                   data: [{% for t in user_sodium %} {{ t }}, {% endfor %}],
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
@@ -148,8 +148,50 @@
                   borderWidth: 1
               },
               {
-                label: 'Potassium',
+                label: 'Sodium Max (mg)',
+                data: [2300],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            },
+              {
+                label: 'Potassium (mg)',
                   data: [{% for t in user_potassium %} {{ t }}, {% endfor %}],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              },
+              {
+                label: 'Max Potassium (mg)',
+                  data: [3000],
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(54, 162, 235, 0.2)',
@@ -171,6 +213,27 @@
               {
                 label: 'Phosphorus',
                   data: [{% for t in user_phosphorus %} {{ t }}, {% endfor %}],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              },
+              {
+                label: 'Max Phosphorus',
+                  data: [1000],
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(54, 162, 235, 0.2)',
@@ -235,7 +298,28 @@
                         'rgba(255, 159, 64, 1)'
                     ],
                     borderWidth: 1
-                }]
+                },
+                {
+                  label: 'Max Protein',
+                  data: [{% for t in user_weight %} {{t}} , {% endfor %}],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              }]
   
             },
             options: {
@@ -297,92 +381,7 @@
           </script>
         {% endif %}
     </section>
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-      <center>
-        <div class="container">
-
-          <div class="section-title">
-            <h2>Services</h2>
-            <p>To help you achieve your wellbeing goals, we're happy to offer 6 services</p>
-          </div>
-
-          <div class="row">
-            
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-              <div class="icon-box-dashboard container">
-                  <canvas id="chart1"></canvas>
-              </div>
-              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                  <script>
-                    let ctx1 = document.getElementById("chart1").getContext("2d");
-                    let chart1 = new Chart(ctx1, {
-                      type: "radar",
-                      data: {
-                        labels: [
-                          "potassium",
-                          "phosphorus",
-                          "sodium",
-                        ],
-                        datasets: [
-                          {
-                            label: "Potassium Ex",
-                            data: [65, 59, 90, 81, 56, 55, 40],
-                            fill: true,
-                            backgroundColor: "rgba(255, 99, 132, 0.2)",
-                            borderColor: "rgb(255, 99, 132)",
-                            pointBackgroundColor: "rgb(255, 99, 132)",
-                            pointBorderColor: "#fff",
-                            pointHoverBackgroundColor: "#fff",
-                            pointHoverBorderColor: "rgb(255, 99, 132)",
-                          },
-                          {
-                            label: "Sodium Ex",
-                            data: [28, 48, 40, 19, 96, 27, 100],
-                            fill: true,
-                            backgroundColor: "rgba(54, 162, 235, 0.2)",
-                            borderColor: "rgb(54, 162, 235)",
-                            pointBackgroundColor: "rgb(54, 162, 235)",
-                            pointBorderColor: "#fff",
-                            pointHoverBackgroundColor: "#fff",
-                            pointHoverBorderColor: "rgb(54, 162, 235)",
-                          },
-                          {
-                            label: "Phosphorus Ex",
-                            data: [30, 60, 23, 38, 12, 74, 100],
-                            fill: true,
-                            backgroundColor: "rgba(48, 237, 41, 0.2)",
-                            borderColor: "rgb(48, 237, 41)",
-                            pointBackgroundColor: "rgb(48, 237, 41)",
-                            pointBorderColor: "#fff",
-                            pointHoverBackgroundColor: "#fff",
-                            pointHoverBorderColor: "rgb(48, 237, 41)",
-                          },
-                        ],
-                      },
-                      options: {
-                        responsive: true,
-                      },
-                    });
-
-              
-                  </script>
-              </div>
-
-            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-              <div class="icon-box-dashboard container">
-                <div class="icon"><i class="fas fa-apple-alt"></i></div>
-                <h4><a href="">MyDiet</a></h4>
-                <p>See what you've eaten recently and get tips for foods you might like</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-        </div>
-        </section>
-
+  
  </main>
  <!-- End #main -->
 
