@@ -154,11 +154,7 @@ def myFoodJournalAdd(request):
                 food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
                 food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
                 food_entry.eating_time = request.POST.get('eating_time')
-<<<<<<< HEAD
                 food_entry.units_count = float(request.POST.get('quantity'))
-=======
-                food_entry.units_count = request.POST.get('quantity')
->>>>>>> chase's-branch
                 food_entry.food = Food_Item.objects.get(name = request.POST.get('name'))
                 food_entry.save()
 
@@ -226,7 +222,6 @@ def myFoodJournalAdd(request):
         'food_units': food_units,
         'drink_units': fluid_units
     }
-
     return render(request, 'client_app/addjournalentry.html', context)
 
 def myDashboardView(request):
