@@ -123,9 +123,12 @@
       const myChart = new Chart(ctx, {
           type: 'pie',
           data: {
-              labels: ["sodium",
-              "potassium",
-              "phosphorus",],
+              labels: ["Sodium",
+              'Max Sodium'
+              "Potassium",
+              "Max Potassium",
+              "Phosphorus",
+              'Max Phosphorus',],
               datasets: [{
                   label: 'Sodium (mg)',
                   data: [{% for t in user_sodium %} {{ t }}, {% endfor %}],
