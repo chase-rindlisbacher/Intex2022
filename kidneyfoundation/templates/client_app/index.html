@@ -9,7 +9,6 @@
     <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mydashboard' %}">MyDashboard</a></li>
     <li><a class="nav-link scrollto" href="{% url 'myfoodjournal' %}">MyFoodJournal</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'mymenu' %}">MyMenu</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mycommunity' %}">MyCommunity</a></li>
     <li><a class="nav-link scrollto" href="{% url 'index' %}">MyLearningCenter</a></li>
     <li><a class="nav-link scrollto" href="{% url 'myprofile' %}">MyProfile</a></li>
@@ -70,7 +69,11 @@
               <p>
                 Our goal is to help educate, create a community of support, and provide rewards to kidney disease patients as they make lifestyle changes. We also strive to help existing patients continue to live a healthy lifestyle with those same goals!
               </p>
+              {% if user.is_authenticated %}
+              <p>See all the options we have available to make the most of your experience</p>
+              {% else %}
               <p>For the best experience, please create an account or login!</p>
+              {% endif %}
               <div class="text-center">
                 <a href="{% url 'index' %}" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
               </div>
@@ -84,7 +87,11 @@
                     <i class="bx bx-book-add"></i>
                     <h4>Educate</h4>
                     <p>Not a food or exercise guru? We've got your back!</p>
+                    {% if user.is_authenticated %}
+                    <p>Head over to our FAQ page to get the best kidney-friendly recipes for you and your family!</p>
+                    {% else %}
                     <p>Login to your account or provide us with a few anonymous details and we can customize your kidney diet to help you reach your goals.</p>
+                    {% endif %}
                   </div>
                 </div>
                 <div class="col-xl-4 d-flex align-items-stretch">
@@ -178,14 +185,6 @@
               <div class="icon"><i class="fas fa-edit"></i></div>
               <h4><a href="{% url 'myfoodjournal' %}">MyFoodJournal</a></h4>
               <p>Keep a journal of everything you eat and we'll help you stay on track with your essential nutrients</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-apple-alt"></i></div>
-              <h4><a href="{% url 'mymenu' %}">MyMenu</a></h4>
-              <p>See what you've eaten recently and get tips for foods you might like</p>
             </div>
           </div>
 
