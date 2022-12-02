@@ -118,33 +118,6 @@
             <thead>
               <td>Date</td>
               <td>Meal</td>
-              <td>Food Item</td>
-              <td>Quantity</td>
-              <td>Sodium</td>
-              <td>Potassium</td>
-              <td>Phosphorus</td>
-              <td>Protein</td>
-            </thead>
-            <tbody>
-              {% for food in foods %}
-              <tr>
-                <td>{{food.date}}</td>
-                <td>{{food.eating_time}}</td>
-                <td>{{food.food}}</td>
-                <td>{{food.units_count}}</td>
-                <td>{{food.sodium}}</td>
-                <td>{{food.potassium}}</td>
-                <td>{{food.phosphorus}}</td>
-                <td>{{food.protein}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          <br>
-          <table>
-            <thead>
-              <td>Date</td>
-              <td>Meal</td>
               <td>Item</td>
               <td>Quantity</td>
               <td>Sodium</td>
@@ -154,16 +127,16 @@
             </thead>
             <br>
             <tbody>
-              {% for e in everything %}
+              {% for f in foods %}
               <tr>
-                <td>{{e.date}}</td>
-                <td>{{e.eating_time}}</td>
-                <td>{{e.food}}</td>
-                <td>{{e.units_count}}</td>
-                <td>{{e.sodium}}</td>
-                <td>{{e.potassium}}</td>
-                <td>{{e.phosphorus}}</td>
-                <td>{{e.protein}}</td>
+                <td>{{f.date}}</td>
+                <td>{{f.eating_time}}</td>
+                <td>{{f.food}}</td>
+                <td>{{f.units_count}}</td>
+                <td>{{f.sodium}}</td>
+                <td>{{f.potassium}}</td>
+                <td>{{f.phosphorus}}</td>
+                <td>{{f.protein}}</td>
               </tr>
               {% endfor %}
             </tbody>
