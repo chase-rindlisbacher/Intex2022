@@ -202,7 +202,7 @@ def myDashboardView(request):
 
         try:
             username = request.user.get_username()
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Sodium) as sodium
             FROM
@@ -220,7 +220,7 @@ def myDashboardView(request):
             conn.close()
             sodium = [item for t in user_sodium for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Potassium) as potassium
             FROM
@@ -239,7 +239,7 @@ def myDashboardView(request):
             conn.close()
             potassium = [item for t in user_potassium for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Phosphorus) as phosphorus
             FROM
@@ -258,7 +258,7 @@ def myDashboardView(request):
             conn.close()
             phosphorus = [item for t in user_phosphorus for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Protein) as protein
             FROM
@@ -277,7 +277,7 @@ def myDashboardView(request):
             conn.close()
             protein = [item for t in user_protein for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Water) as water
             FROM
@@ -296,7 +296,7 @@ def myDashboardView(request):
             conn.close()
             water = [item for t in user_water for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sex FROM patient
             WHERE username= %s; """,(username,))
@@ -308,7 +308,7 @@ def myDashboardView(request):
             if sex[0] == 'male' :
                 male = sex[0]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT weight FROM patient
             WHERE username= %s; """,(username,))
