@@ -243,7 +243,7 @@ def myDashboardView(request):
             GROUP BY food_id, date,username) AS sq1
             INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
             GROUP BY date,username
-            HAVING sq2.username = %s
+            HAVING (sq2.username = %s) and (cast(sq2.date as date) = CURRENT_DATE)
             ORDER BY sq2.date asc; """, (username,))
             user_sodium = cur.fetchall()
             cur.close()
@@ -261,7 +261,7 @@ def myDashboardView(request):
             GROUP BY food_id, date,username) AS sq1
             INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
             GROUP BY date,username
-            HAVING sq2.username = %s
+            HAVING (sq2.username = %s) and (cast(sq2.date as date) = CURRENT_DATE)
             ORDER BY sq2.date asc; """, (username,))
 
             user_potassium = cur.fetchall()
@@ -280,7 +280,7 @@ def myDashboardView(request):
             GROUP BY food_id, date,username) AS sq1
             INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
             GROUP BY sq2.date,sq2.username
-            HAVING sq2.username = %s
+            HAVING (sq2.username = %s) and (cast(sq2.date as date) = CURRENT_DATE)
             ORDER BY sq2.date asc; """, (username,))
 
             user_phosphorus = cur.fetchall()
@@ -299,7 +299,7 @@ def myDashboardView(request):
             GROUP BY food_id, date,username) AS sq1
             INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
             GROUP BY sq2.date,sq2.username
-            HAVING sq2.username = %s
+            HAVING (sq2.username = %s) and (cast(sq2.date as date) = CURRENT_DATE)
             ORDER BY sq2.date asc; """, (username,))
 
             user_protein = cur.fetchall()
