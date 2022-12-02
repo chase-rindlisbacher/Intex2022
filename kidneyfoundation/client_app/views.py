@@ -327,6 +327,18 @@ def myDashboardView(request):
 
             conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
+            cur.execute(""" SELECT sex FROM patient
+            WHERE username= %s; """,(username,))
+
+            user_sex = cur.fetchall()
+            cur.close()
+            conn.close()
+            sex = [item for t in user_sex for item in t]
+            if sex[0] == 'male' :
+                male = sex[0]
+
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            cur = conn.cursor()
             cur.execute(""" SELECT weight FROM patient
             WHERE username= %s; """,(username,))
 
@@ -344,6 +356,7 @@ def myDashboardView(request):
             'user_phosphorus' : phosphorus,
             'user_protein' : protein,
             'user_water' : water,
+            'user_male' : male,
             'user_weight' : weight,
             }
             # sq_food = Report_Food.objects.raw(f'SELECT ')
