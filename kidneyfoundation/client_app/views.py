@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth import authenticate
-import psycopg2
 
 
 # Create your views here.
@@ -105,7 +104,7 @@ def myFoodJournalView(request):
     if request.user.is_authenticated:
         foods = Report_Food.objects.filter(username = request.user.get_username()).order_by('-date')
         context = {
-            'foods': foods
+            'foods': foods,
         }
 
         return render(request, 'client_app/myfoodjournal.html', context)
