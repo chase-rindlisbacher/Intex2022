@@ -206,7 +206,7 @@ def myDashboardView(request):
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Sodium) as sodium
             FROM
-            (SELECT date,username,(sodium * Quantity) as Sodium,(potassium * Quantity) as Potassium,(phosphorus * Quantity) as Phosphorus
+            (SELECT date,username,(sodium * Quantity) as Sodium
             FROM
             (SELECT date,sum(units_count) as Quantity,food_id,username
             FROM report_food
@@ -317,7 +317,7 @@ def myDashboardView(request):
             cur.close()
             conn.close()
             weight = [item for t in user_weight for item in t]
-            weight[0] = weight[0] * 0.6
+            weight[0] = round((weight[0] * 0.6 * 0.453),0)
             context = {
             'mg_nutrients': mg_nutrients,
             'g_nutrients': g_nutrients,
@@ -340,7 +340,7 @@ def myDashboardView(request):
             'min_water_female': min_water_woman,
             'max_water_female': max_water_woman,
             'max_phosphorus': max_phosphorus,
-            'min_phosphorus': min_phosphorus
+            'min_phosphorus': min_phosphorus,
             }
             # sq_food = Report_Food.objects.raw(f'SELECT ')
             # sq1 = Report_Food.objects.raw(f'SELECT * FROM report_food WHERE username={username}')
