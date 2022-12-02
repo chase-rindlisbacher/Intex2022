@@ -141,9 +141,49 @@ def myFoodJournalView(request):
         conn.close()
         potassium = [item for t in user_potassium for item in t]
 
+        username = request.user.get_username()
+        conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+        cur = conn.cursor()
+        cur.execute(""" SELECT sum(Sodium) as sodium
+        FROM
+        (SELECT date,username,(sodium * Quantity) as Sodium,(potassium * Quantity) as Potassium,(phosphorus * Quantity) as Phosphorus
+        FROM
+        (SELECT date,sum(units_count) as Quantity,food_id,username
+        FROM report_food
+        GROUP BY food_id, date,username) AS sq1
+        INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
+        GROUP BY date,username
+        HAVING (sq2.username = %s) and (cast(sq2.date as date) = CURRENT_DATE)
+        ORDER BY sq2.date asc; """, (username,))
+        user_sodium = cur.fetchall()
+        cur.close()
+        conn.close()
+        sodium = [item for t in user_sodium for item in t]
+
+        conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+        cur = conn.cursor()
+        cur.execute(""" SELECT sum(Phosphorus) as phosphorus
+        FROM
+        (SELECT date,username,(phosphorus * Quantity) as Phosphorus
+        FROM
+        (SELECT date,sum(units_count) as Quantity,food_id,username
+        FROM report_food
+        GROUP BY food_id, date,username) AS sq1
+        INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
+        GROUP BY sq2.date,sq2.username
+        HAVING (sq2.username = %s) and (cast(sq2.date as date) = CURRENT_DATE)
+        ORDER BY sq2.date asc; """, (username,))
+
+        user_phosphorus = cur.fetchall()
+        cur.close()
+        conn.close()
+        phosphorus = [item for t in user_phosphorus for item in t]
+
         context = {
             'foods': foods,
             'potassium': potassium,
+            'sodium': sodium,
+            'phosphorus': phosphorus,
             'min-potassium': min_potassium,
             'max-potassium': max_potassium,
             'min-sodium': min_sodium,
@@ -229,6 +269,24 @@ def myDashboardView(request):
     g_nutrients = Nutrient.objects.filter(units='g/kg bd wt', frequency='daily')
     L_day = Nutrient.objects.filter(units='L/day', frequency='daily')
     if request.user.is_authenticated:
+        max_potassium = Nutrient.objects.get(name = 'potassium', frequency='daily').patient_target_max
+        min_potassium = Nutrient.objects.get(name = 'potassium', frequency='daily').patient_target_min
+
+        max_sodium = Nutrient.objects.get(name = 'sodium', frequency='daily').patient_target_max
+        min_sodium = Nutrient.objects.get(name = 'sodium', frequency='daily').patient_target_min
+
+        max_phosphorus = Nutrient.objects.get(name = 'phosphorus', frequency='daily').patient_target_max
+        min_phosphorus = Nutrient.objects.get(name = 'phosphorus', frequency='daily').patient_target_min
+
+        max_protein = Nutrient.objects.get(name = 'protein', frequency='daily').patient_target_max
+        min_protein = Nutrient.objects.get(name = 'protein', frequency='daily').patient_target_min
+
+        max_water_man = Nutrient.objects.get(name = 'water', frequency='daily', gender_specific='male').patient_target_max
+        min_water_man = Nutrient.objects.get(name = 'water', frequency='daily', gender_specific='male').patient_target_min
+
+        max_water_woman = Nutrient.objects.get(name = 'water', frequency='daily', gender_specific='female').patient_target_max
+        min_water_woman = Nutrient.objects.get(name = 'water', frequency='daily', gender_specific='female').patient_target_min
+
         try:
             username = request.user.get_username()
             conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
@@ -345,6 +403,18 @@ def myDashboardView(request):
             'user_protein' : protein,
             'user_water' : water,
             'user_weight' : weight,
+            'max_potassium': max_potassium,
+            'min_potassium': min_potassium,
+            'max_sodium': max_sodium,
+            'min_sodium': min_sodium,
+            'max_protein': max_protein,
+            'min_protein': min_protein,
+            'max_water_male': max_water_man,
+            'min_water_male': min_water_man,
+            'min_water_female': min_water_woman,
+            'max_water_female': max_water_woman,
+            'max_phosphorus': max_phosphorus,
+            'min_phosphorus': min_phosphorus
             }
             # sq_food = Report_Food.objects.raw(f'SELECT ')
             # sq1 = Report_Food.objects.raw(f'SELECT * FROM report_food WHERE username={username}')

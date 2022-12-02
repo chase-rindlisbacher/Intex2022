@@ -57,18 +57,19 @@
     <div class="row">
       <div class="col-lg-4 d-flex align-items-stretch">
         <div class="content">
-          <h3>Our Approach: </h3>
+          <h3>View your progress</h3>
           <p>
-            Our goal is to help educate, create a community of support, and provide rewards to kidney disease patients as they make lifestyle changes. We also strive to help existing patients continue to live a healthy lifestyle with those same goals!
+            Here you'll see a visual of all your hard work! Plus, we will give you advice based on what you should be eating whenever you visit this page.
           </p>
           {% if user.is_authenticated %}
-          <p>See all the options we have available to make the most of your experience</p>
+          <div class="text-center">
+            <a href="{% url 'myfoodjournaladd' %}" class="more-btn">Add a journal entry<i class="bx bx-chevron-right"></i></a>
+          </div>
           {% else %}
-          <p>For the best experience, please create an account or login!</p>
-          {% endif %}
           <div class="text-center">
             <a href="{% url 'index' %}" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
           </div>
+          {% endif %}
         </div>
       </div>
       <div class="col-lg-8 d-flex align-items-stretch">
@@ -77,29 +78,130 @@
             <div class="col-xl-4 d-flex align-items-stretch">
               <div class="icon-box mt-4 mt-xl-0">
                 <i class="bx bx-book-add"></i>
-                <h4>Educate</h4>
-                <p>Not a food or exercise guru? We've got your back!</p>
+                <h4>High</h4>
                 {% if user.is_authenticated %}
-                <p>Head over to our FAQ page to get the best kidney-friendly recipes for you and your family!</p>
+                  {% for s in user_sodium %}
+                    {% if s > max_sodium %}
+                      <p>Sodium - Eat a banana or some beans</p>
+                    {% endif %}
+                  {% endfor %}
+                  {% for phos in user_phosphorus %}
+                    {% if phos > max_phosphorus %}
+                      <p>Phosphorus - </p>
+                    {% endif %}
+                  {% endfor %}
+                  {% for protein in user_protein %}
+                    {% if protein > max_protein %}
+                      <p>Protein - </p>
+                    {% endif %}
+                  {% endfor %}
+                  {% for potas in user_potassium %}
+                    {% if potas > max_potassium %}
+                      <p>Potassium - </p>
+                    {% endif %}
+                  {% endfor %}
+                  {% if sex == 'male' %}
+                    {% for w in water %}
+                      {% if w > max_water_male %}
+                        <p>Water - </p>
+                      {% endif %}
+                    {% endfor %}
+                  {% else %}
+                    {% for w in water %}
+                      {% if w > max_water_female %}
+                        <p>Water - </p>
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
                 {% else %}
-                <p>Login to your account or provide us with a few anonymous details and we can customize your kidney diet to help you reach your goals.</p>
+                  <p>Login for more info</p>
                 {% endif %}
               </div>
             </div>
             <div class="col-xl-4 d-flex align-items-stretch">
               <div class="icon-box mt-4 mt-xl-0">
                 <i class="bx bx-smile"></i>
-                <h4>Support</h4>
-                <p>Studies show that friendship makes lifestyle changes easier.</p>
-                <p>We provide you a way to be part of a customizable community that helps you meet lifestyle goals.</p>
+                <h4>In-Range</h4>
+                {% if user.is_authenticated %}
+                {% for s in user_sodium %}
+                  {% if s < max_sodium  and s > min_sodium%}
+                    <p>Sodium</p>
+                  {% endif %}
+                {% endfor %}
+                {% for phos in user_phosphorus %}
+                  {% if phos < max_phosphorus and phos > min_phosphorus %}
+                    <p>Phosphorus</p>
+                  {% endif %}
+                {% endfor %}
+                {% for protein in user_protein %}
+                  {% if protein < max_protein and protein > min_protein %}
+                    <p>Protein</p>
+                  {% endif %}
+                {% endfor %}
+                {% for potas in user_potassium %}
+                  {% if potas < max_potassium and potas > min_potassium %}
+                    <p>Potassium</p>
+                  {% endif %}
+                {% endfor %}
+                {% if sex == 'male' %}
+                  {% for w in water %}
+                    {% if w < max_water_male and w > min_water_male%}
+                      <p>Water</p>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  {% for w in water %}
+                    {% if w < max_water_female and w > min_water_female %}
+                      <p>Water</p>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              {% else %}
+                <p>Login for more info</p>
+              {% endif %}
               </div>
             </div>
             <div class="col-xl-4 d-flex align-items-stretch">
               <div class="icon-box mt-4 mt-xl-0">
                 <i class="bx bx-donate-heart"></i>
-                <h4>Reward</h4>
-                <p>You should be rewarded for all your hard work!</p>
-                <p>The more goals you achieve, the more points you receive – which can be converted into the prizes of your choice!</p>
+                <h4>Low</h4>
+                {% if user.is_authenticated %}
+                {% for s in user_sodium %}
+                  {% if s < min_sodium%}
+                    <p>Sodium -</p>
+                  {% endif %}
+                {% endfor %}
+                {% for phos in user_phosphorus %}
+                  {% if phos < min_phosphorus %}
+                    <p>Phosphorus -</p>
+                  {% endif %}
+                {% endfor %}
+                {% for protein in user_protein %}
+                  {% if protein < min_protein %}
+                    <p>Protein</p>
+                  {% endif %}
+                {% endfor %}
+                {% for potas in user_potassium %}
+                  {% if potas < min_potassium %}
+                    <p>Potassium</p>
+                  {% endif %}
+                {% endfor %}
+                {% if sex == 'male' %}
+                  {% for w in water %}
+                    {% if w < min_water_male%}
+                      <p>Water</p>
+                    {% endif %}
+                  {% endfor %}
+                {% else %}
+                  {% for w in water %}
+                    {% if w < min_water_female %}
+                      <p>Water</p>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+              {% else %}
+                <p>Login for more info</p>
+              {% endif %}
               </div>
             </div>
           </div>
