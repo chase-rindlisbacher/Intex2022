@@ -237,11 +237,11 @@
               'Max Phosphorus',],
               datasets: [{
                   label: 'Micronutrients (mg)',
-                  data: [{% for t in user_sodium %} {{ t }}, {% endfor %},
+                  data: [{% for t in user_sodium %} {{ t }} {% endfor %},
                           2300,
-                          {% for t in user_potassium %} {{ t }}, {% endfor %},
+                          {% for t in user_potassium %} {{ t }} {% endfor %},
                           3000,
-                          {% for t in user_phosphorus %} {{ t }}, {% endfor %},
+                          {% for t in user_phosphorus %} {{ t }} {% endfor %},
                           1000,],
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
@@ -291,8 +291,8 @@
                 ],
                 datasets: [{
                     label: 'Protein',
-                    data: [{% for t in user_protein %} {{ t }}, {% endfor %},
-                           {% for t in user_weight %} {{t}} , {% endfor %}],
+                    data: [{% for t in user_protein %} {{ t }} {% endfor %},
+                           {% for t in user_weight %} {{t}} {% endfor %}],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -340,7 +340,7 @@
                   'Max Water (L)'],
                   datasets: [{
                       label: 'Water',
-                      data: [{% for t in user_water %} {{ t }}, {% endfor %},
+                      data: [{% for t in user_water %} {{ t }} {% endfor %},
                              {% if user_male %} 3.7 {% else %} 2.7 {% endif %}],
                       backgroundColor: [
                           'rgba(255, 99, 132, 0.2)',
