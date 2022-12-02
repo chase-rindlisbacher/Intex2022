@@ -10,6 +10,7 @@
     <li><a class="nav-link scrollto active" href="{% url 'mydashboard' %}">MyDashboard</a></li>
     <li><a class="nav-link scrollto" href="{% url 'myfoodjournal' %}">MyFoodJournal</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mycommunity' %}">MyCommunity</a></li>
+    <li><a class="nav-link scrollto" href="{% url 'myprofile' %}">MyProfile</a></li>
     <li><a class="nav-link scrollto" href="{% url 'index' %}#faq">FAQ</a></li>
     <!-- Keep but don't use right now 
     <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
@@ -82,34 +83,35 @@
                 {% if user.is_authenticated %}
                   {% for s in user_sodium %}
                     {% if s > max_sodium %}
-                      <p>Sodium - Eat a banana or some beans</p>
+                      <p><span style="font-weight: bold;">Sodium - Avoid eating things like shrimp and ham</span></p>
                     {% endif %}
                   {% endfor %}
                   {% for phos in user_phosphorus %}
                     {% if phos > max_phosphorus %}
-                      <p>Phosphorus - </p>
+                      <p><span style="font-weight: bold;">Phosphorus - Avoid eating things like meat and dairy</span></p>
                     {% endif %}
                   {% endfor %}
                   {% for protein in user_protein %}
                     {% if protein > user_weight %}
-                      <p>Protein - </p>
+                      <p><span style="font-weight: bold;">Protein - Avoid eating things like meat and eggs</span></p>
                     {% endif %}
                   {% endfor %}
                   {% for potas in user_potassium %}
                     {% if potas > max_potassium %}
-                      <p>Potassium - </p>
+                      <p><span style="font-weight: bold;">Potassium - Avoid eating things like fresh fruits and potatoes</span></p>
                     {% endif %}
                   {% endfor %}
                   {% if sex == 'male' %}
                     {% for w in water %}
                       {% if w > max_water_male %}
-                        <p>Water - </p>
+                        <p><span style="font-weight: bold;">Water - Good job drinking, but maybe drink a few less glasses</span></p>
                       {% endif %}
                     {% endfor %}
                   {% else %}
                     {% for w in water %}
                       {% if w > max_water_female %}
-                        <p>Water - </p>
+                        <p><span style="font-weight: bold;">Water - Good job drinking, but maybe drink a few less glasses</span>
+                        </p>
                       {% endif %}
                     {% endfor %}
                   {% endif %}
@@ -125,34 +127,34 @@
                 {% if user.is_authenticated %}
                 {% for s in user_sodium %}
                   {% if s < max_sodium  and s > min_sodium%}
-                    <p>Sodium</p>
+                    <p><span style="font-weight: bold;">Sodium</span></p>
                   {% endif %}
                 {% endfor %}
                 {% for phos in user_phosphorus %}
                   {% if phos < max_phosphorus and phos > min_phosphorus %}
-                    <p>Phosphorus</p>
+                    <p><span style="font-weight: bold;">Phosphorus</span></p>
                   {% endif %}
                 {% endfor %}
                 {% for protein in user_protein %}
                   {% if protein < user_weight and protein > user_weight %}
-                    <p>Protein</p>
+                    <p><span style="font-weight: bold;">Protein</span></p>
                   {% endif %}
                 {% endfor %}
                 {% for potas in user_potassium %}
                   {% if potas < max_potassium and potas > min_potassium %}
-                    <p>Potassium</p>
+                    <p><span style="font-weight: bold;">Potassium</span></p>
                   {% endif %}
                 {% endfor %}
                 {% if sex == 'male' %}
                   {% for w in water %}
                     {% if w < max_water_male and w > min_water_male%}
-                      <p>Water</p>
+                      <p><span style="font-weight: bold;">Water</span></p>
                     {% endif %}
                   {% endfor %}
                 {% else %}
                   {% for w in water %}
                     {% if w < max_water_female and w > min_water_female %}
-                      <p>Water</p>
+                      <p><span style="font-weight: bold;">Water</span></p>
                     {% endif %}
                   {% endfor %}
                 {% endif %}
@@ -167,35 +169,35 @@
                 <h4>Low</h4>
                 {% if user.is_authenticated %}
                 {% for s in user_sodium %}
-                  {% if s < min_sodium%}
-                    <p>Sodium -</p>
+                  {% if s < min_sodium or s == '' %}
+                    <p><span style="font-weight: bold;">Sodium</span> - Eat some shellfish or celery</p>
                   {% endif %}
                 {% endfor %}
                 {% for phos in user_phosphorus %}
                   {% if phos < min_phosphorus %}
-                    <p>Phosphorus -</p>
+                    <p><span style="font-weight: bold;">Phosphorus</span> - Eat some swiss cheese or peanut butter</p>
                   {% endif %}
                 {% endfor %}
                 {% for protein in user_protein %}
                   {% if protein < user_weight %}
-                    <p>Protein</p>
+                    <p><span style="font-weight: bold;">Protein</span> - Have some of your favorite meat or some beans</p>
                   {% endif %}
                 {% endfor %}
                 {% for potas in user_potassium %}
                   {% if potas < min_potassium %}
-                    <p>Potassium</p>
+                    <p><span style="font-weight: bold;">Potassium</span> - Eat a banana or some beans</p>
                   {% endif %}
                 {% endfor %}
                 {% if sex == 'male' %}
                   {% for w in water %}
                     {% if w < min_water_male%}
-                      <p>Water</p>
+                      <p><span style="font-weight: bold;">Water</span> - Have another glass or two</p>
                     {% endif %}
                   {% endfor %}
                 {% else %}
                   {% for w in water %}
                     {% if w < min_water_female %}
-                      <p>Water</p>
+                      <p><span style="font-weight: bold;">Water</span> - Have another glass or two </p>
                     {% endif %}
                   {% endfor %}
                 {% endif %}

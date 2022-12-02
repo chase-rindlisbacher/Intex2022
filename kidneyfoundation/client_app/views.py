@@ -15,7 +15,7 @@ def indexPageView(request) :
     nutrients = Nutrient.objects.filter(frequency = 'daily').order_by('name')
 
     context = {
-        'nutrients': nutrients
+        'nutrients': nutrients,
     }
     return render(request, 'client_app/index.html', context)
 
@@ -35,7 +35,7 @@ def loginPageView(request) :
                 'fname': fname, 
                 'nutrients': nutrients
             }
-            return render(request, 'client_app/index.html', context)
+            return redirect('index')
         else:
             messages.error(request, 'Bad credentials')
             return redirect('new_user')
@@ -361,11 +361,54 @@ def myDashboardView(request):
     return render(request, 'client_app/mydashboard.html', context)
 
 def myProfileView(request):
-    return render(request, 'client_app/myprofile.html')
+    if (request.method == 'POST'):
+        uname = request.user.get_username()
+        new_height = request.POST.get('height')
+        new_weight = request.POST.get('weight')
+        new_condition = request.POST.get('diagnosis')
+
+        patient = Patient.objects.get(username = uname)
+
+        if (new_height != patient.height and new_height != ''):
+            patient.height = new_height
+        if (new_weight != patient.weight and new_weight != ''):
+            patient.weight = new_weight
+        if (new_condition != patient.diagnosis ):
+            patient.diagnosis = Condition.objects.get(id=new_condition)
+
+        patient.save()
+        
+        
+
+    uname = request.user.get_username()
+
+    patient = Patient.objects.get(username = uname)
+
+    diagnoses = Condition.objects.all()
+
+    context = {
+        'patient': patient,
+        'diagnoses': diagnoses
+    }
+
+    return render(request, 'client_app/myprofile.html', context)
 
 def myCommunityView(request):
     return render(request, 'client_app/mycommunity.html')
 
 def logoutUser(request):
     logout(request)
+    return redirect('index')
+
+def deleteUser(request):
+    uname = request.user.get_username()
+
+    patient = Patient.objects.get(username = uname)
+
+    user = User.objects.get(username = uname)
+
+    patient.delete()
+
+    user.delete()
+
     return redirect('index')

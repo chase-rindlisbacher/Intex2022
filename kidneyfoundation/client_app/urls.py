@@ -10,5 +10,6 @@ urlpatterns = [
     path('mydashboard/', myDashboardView, name='mydashboard'),
     path('myprofile/', myProfileView, name='myprofile'),
     path('mycommunity/', myCommunityView, name='mycommunity'),
+    path('delete', deleteUser, name='delete'),
     path('', indexPageView, name='index'),
 ]
