@@ -33,6 +33,11 @@
   </ul>
   <i class="bi bi-list mobile-nav-toggle"></i>
 </nav><!-- .navbar -->
+{% if user.is_authenticated %}
+<a href="{% url 'logout' %}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Logout</span></a>
+{% else %}
+<a href="{% url 'login' %}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span></a>
+{% endif %}
 {% endblock %}
 {% block content %}
     <div class="container" style="margin-top: 25vh">

@@ -107,7 +107,7 @@ def myFoodJournalView(request):
         report = Report_Food.objects.get(id=to_delete)
 
         report.delete()
-        
+
     if request.user.is_authenticated:
         foods = Report_Food.objects.filter(username = request.user.get_username()).order_by('-date')
 
@@ -208,7 +208,7 @@ def myDashboardView(request):
 
         try:
             username = request.user.get_username()
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Sodium) as sodium
             FROM
@@ -226,7 +226,7 @@ def myDashboardView(request):
             conn.close()
             sodium = [item for t in user_sodium for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Potassium) as potassium
             FROM
@@ -245,7 +245,7 @@ def myDashboardView(request):
             conn.close()
             potassium = [item for t in user_potassium for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Phosphorus) as phosphorus
             FROM
@@ -264,7 +264,7 @@ def myDashboardView(request):
             conn.close()
             phosphorus = [item for t in user_phosphorus for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Protein) as protein
             FROM
@@ -283,7 +283,7 @@ def myDashboardView(request):
             conn.close()
             protein = [item for t in user_protein for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Water) as water
             FROM
@@ -302,7 +302,7 @@ def myDashboardView(request):
             conn.close()
             water = [item for t in user_water for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT sex FROM patient
             WHERE username= %s; """,(username,))
@@ -314,7 +314,7 @@ def myDashboardView(request):
             if sex[0] == 'male' :
                 male = sex[0]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
             cur = conn.cursor()
             cur.execute(""" SELECT weight FROM patient
             WHERE username= %s; """,(username,))
@@ -323,7 +323,7 @@ def myDashboardView(request):
             cur.close()
             conn.close()
             weight = [item for t in user_weight for item in t]
-            weight[0] = weight[0] * 0.6
+            weight[0] = round((weight[0] * 0.6 * 0.435), 0)
             context = {
             'mg_nutrients': mg_nutrients,
             'g_nutrients': g_nutrients,
@@ -384,20 +384,22 @@ def myProfileView(request):
 
         patient.save()
         
-        
+    if (request.user.is_authenticated):
 
-    uname = request.user.get_username()
+        uname = request.user.get_username()
 
-    patient = Patient.objects.get(username = uname)
+        patient = Patient.objects.get(username = uname)
 
-    diagnoses = Condition.objects.all()
+        diagnoses = Condition.objects.all()
 
-    context = {
-        'patient': patient,
-        'diagnoses': diagnoses
-    }
+        context = {
+            'patient': patient,
+            'diagnoses': diagnoses
+        }
+        return render(request, 'client_app/myprofile.html', context)
+    else:
+        return redirect('login')
 
-    return render(request, 'client_app/myprofile.html', context)
 
 def myCommunityView(request):
     return render(request, 'client_app/mycommunity.html')
