@@ -172,15 +172,111 @@ def myFoodJournalAdd(request):
         #'protein': protein_level,
         #'water': water_level,
     }
-
     return render(request, 'client_app/addjournalentry.html', context)
 
 def myDashboardView(request):
+    import psycopg2
     mg_nutrients = Nutrient.objects.filter(units='mg', frequency='daily')
+    g_nutrients = Nutrient.objects.filter(units='g/kg bd wt', frequency='daily')
+    L_day = Nutrient.objects.filter(units='L/day', frequency='daily')
+    if request.user.is_authenticated:
+        try:
+            username = request.user.get_username()
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            cur = conn.cursor()
+            cur.execute(""" SELECT sum(Sodium) as sodium
+            FROM
+            (SELECT date,username,(sodium * Quantity) as Sodium,(potassium * Quantity) as Potassium,(phosphorus * Quantity) as Phosphorus
+            FROM
+            (SELECT date,sum(units_count) as Quantity,food_id,username
+            FROM report_food
+            GROUP BY food_id, date,username) AS sq1
+            INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
+            GROUP BY date,username
+            HAVING (sq2.username = %s) and (cast(sq2.date as date) = CURRENT_DATE)
+            ORDER BY sq2.date asc; """, (username,))
+            user_sodium = cur.fetchall()
+            cur.close()
+            conn.close()
+            sodium = [item for t in user_sodium for item in t]
 
-    context = {
-        'mg_nutrients': mg_nutrients
-    }
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            cur = conn.cursor()
+            cur.execute(""" SELECT sum(Potassium) as potassium
+            FROM
+            (SELECT date,username,(potassium * Quantity) as Potassium
+            FROM
+            (SELECT date,sum(units_count) as Quantity,food_id,username
+            FROM report_food
+            GROUP BY food_id, date,username) AS sq1
+            INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
+            GROUP BY date,username
+            HAVING (sq2.username = %s) and (cast(sq2.date as date) = CURRENT_DATE)
+            ORDER BY sq2.date asc; """, (username,))
+
+            user_potassium = cur.fetchall()
+            cur.close()
+            conn.close()
+            potassium = [item for t in user_potassium for item in t]
+
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            cur = conn.cursor()
+            cur.execute(""" SELECT sum(Phosphorus) as phosphorus
+            FROM
+            (SELECT date,username,(phosphorus * Quantity) as Phosphorus
+            FROM
+            (SELECT date,sum(units_count) as Quantity,food_id,username
+            FROM report_food
+            GROUP BY food_id, date,username) AS sq1
+            INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
+            GROUP BY sq2.date,sq2.username
+            HAVING (sq2.username = %s) and (cast(sq2.date as date) = CURRENT_DATE)
+            ORDER BY sq2.date asc; """, (username,))
+
+            user_phosphorus = cur.fetchall()
+            cur.close()
+            conn.close()
+            phosphorus = [item for t in user_phosphorus for item in t]
+
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            cur = conn.cursor()
+            cur.execute(""" SELECT sum(Protein) as protein
+            FROM
+            (SELECT date,username,(protein * Quantity) as Protein
+            FROM
+            (SELECT date,sum(units_count) as Quantity,food_id,username
+            FROM report_food
+            GROUP BY food_id, date,username) AS sq1
+            INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
+            GROUP BY sq2.date,sq2.username
+            HAVING (sq2.username = %s) and (cast(sq2.date as date) = CURRENT_DATE)
+            ORDER BY sq2.date asc; """, (username,))
+
+            user_protein = cur.fetchall()
+            cur.close()
+            conn.close()
+            protein = [item for t in user_protein for item in t]
+
+            context = {
+            'mg_nutrients': mg_nutrients,
+            'g_nutrients': g_nutrients,
+            'L_day' : L_day,
+            'user_sodium' : sodium,
+            'user_potassium' : potassium,
+            'user_phosphorus' : phosphorus,
+            'user_protein' : protein,
+            }
+            # sq_food = Report_Food.objects.raw(f'SELECT ')
+            # sq1 = Report_Food.objects.raw(f'SELECT * FROM report_food WHERE username={username}')
+            # sq2 = Report_Food.objects.raw(f'SELECT * FROM report_drink WHERE username={username}')
+            # ungrouped = sq1.objects.raw(f'SELECT * FROM {sq1} INNER JOIN {sq2} ON {sq1}.username = {sq2}.username')
+            # ungrouped.objects.raw(f'SELECT ')
+        except:
+            context = {
+            'mg_nutrients': mg_nutrients,
+            'g_nutrients': g_nutrients,
+            'L_day' : L_day,
+            }
 
     return render(request, 'client_app/mydashboard.html', context)
 
