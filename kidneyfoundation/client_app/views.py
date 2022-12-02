@@ -298,6 +298,10 @@ def myDashboardView(request):
             'g_nutrients': g_nutrients,
             'L_day' : L_day,
             }
+    else: 
+        context = {
+            
+        }
 
     return render(request, 'client_app/mydashboard.html', context)
 
