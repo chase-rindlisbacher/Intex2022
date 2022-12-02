@@ -100,36 +100,20 @@ def newAccountPageView(request) :
     }
     return render(request, 'client_app/new_user.html', context)
 
-def myMenuView(request):
-    return render(request, 'client_app/mymenu.html')
-    
-def myMenuAdd(request):
-    if (request.method == 'POST'):
-        name = request.POST.get('name')
-        description = request.POST.get('desc')
-        sodium = request.POST.get('na')
-        protein = request.POST.get('protein')
-        potassium = request.POST.get('k')
-        phosphorus = request.POST.get('phos')
-        day = request.POST.get('day')
-        meal = request.POST.get('eating_time')
-        quant = request.POST.get('quantity')
-    return render(request, 'client_app/addfoods.html')
-
 def myFoodJournalView(request):
     if request.user.is_authenticated:
-        try:
-            foods = Report_Food.objects.get(username = request.user.get_username())
-            drinks = Report_Drink.objects.get(username = request.user.get_username())
+        foods = Report_Food.objects.filter(username = request.user.get_username()).order_by('-date')
+        drinks = Report_Drink.objects.filter(username = request.user.get_username()).order_by('-date')
 
-            context = {
-                'foods': foods,
-                'drinks': drinks
-            }
+        everything = Report_Food.objects.filter(username = request.user.get_username()).union(Report_Drink.objects.filter(username = request.user.get_username())).order_by('-date')
 
-            return render(request, 'client_app/myfoodjournal.html', context)
-        except:
-            return render(request, 'client_app/myfoodjournal.html')
+        context = {
+            'foods': foods,
+            'drinks': drinks,
+            'everything': everything
+        }
+
+        return render(request, 'client_app/myfoodjournal.html', context)
     else:
         return redirect('login')
 
@@ -156,6 +140,10 @@ def myFoodJournalAdd(request):
                 food_entry.eating_time = request.POST.get('eating_time')
                 food_entry.units_count = float(request.POST.get('quantity'))
                 food_entry.food = Food_Item.objects.get(name = request.POST.get('name'))
+                food_entry.sodium = (float(request.POST.get('na')) * float(request.POST.get('quantity')))
+                food_entry.potassium = (float(request.POST.get('k')) * float(request.POST.get('quantity')))
+                food_entry.phosphorus = (float(request.POST.get('phos')) * float(request.POST.get('quantity')))
+                food_entry.protein = (float(request.POST.get('protein')) * float(request.POST.get('quantity')))
                 food_entry.save()
 
             else:
@@ -169,6 +157,10 @@ def myFoodJournalAdd(request):
                 food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
                 food_entry.eating_time = request.POST.get('eating_time')
                 food_entry.units_count = float(request.POST.get('quantity'))
+                food_entry.sodium = (float(request.POST.get('quantity')) * float(food.sodium))
+                food_entry.potassium = (float(request.POST.get('quantity')) * float(food.potassium))
+                food_entry.phosphorus = (float(request.POST.get('quantity')) * float(food.phosphorus))
+                food_entry.protein = (float(request.POST.get('quantity')) * float(food.protein))
                 food_entry.save()
         else:
             if (request.POST.get('drink_existing') == 'no-exist'):

@@ -136,10 +136,11 @@ class Food_Item(models.Model):
     description = models.CharField(max_length=500)
     units = models.ForeignKey(Food_Units, on_delete=models.DO_NOTHING)
 
-    sodium = models.FloatField()
-    protein = models.FloatField()
-    potassium = models.FloatField()
-    phosphorus = models.FloatField()
+    water = models.FloatField(default=0)
+    sodium = models.FloatField(default=0)
+    protein = models.FloatField(default=0)
+    potassium = models.FloatField(default=0)
+    phosphorus = models.FloatField(default=0)
 
     def __str__(self):
         return self.name
@@ -168,10 +169,15 @@ class Drink_Item(models.Model):
 class Report_Food(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     username = models.CharField(max_length=150, default='')
-    date = models.DateTimeField()
+    date = models.DateField()
     eating_time = models.CharField(max_length=10, default='Snack')
     units_count = models.FloatField()
     food = models.ForeignKey(Food_Item, on_delete=models.DO_NOTHING)
+    water = models.FloatField(default=0)
+    sodium = models.FloatField(default=0)
+    potassium = models.FloatField(default=0)
+    phosphorus = models.FloatField(default=0)
+    protein = models.FloatField(default=0)
 
     class Meta:
         db_table = 'report_food'
@@ -179,10 +185,15 @@ class Report_Food(models.Model):
 class Report_Drink(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     username = models.CharField(max_length=150, default='')
-    date = models.DateTimeField()
+    date = models.DateField()
     eating_time = models.CharField(max_length=10, default='Snack')
     units_count = models.FloatField()
     drink = models.ForeignKey(Drink_Item, on_delete=models.DO_NOTHING)
+    water = models.FloatField(default=0)
+    sodium = models.FloatField(default=0)
+    protein = models.FloatField(default=0)
+    potassium = models.FloatField(default=0)
+    phosphorus = models.FloatField(default=0)
 
     class Meta:
         db_table = 'report_drink'
@@ -190,7 +201,7 @@ class Report_Drink(models.Model):
 class Report_Serum(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     username = models.CharField(max_length=150, default='')
-    date = models.DateTimeField()
+    date = models.DateField()
     
     potassium = models.FloatField()
     phosphorus = models.FloatField()
