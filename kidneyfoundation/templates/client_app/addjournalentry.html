@@ -48,6 +48,7 @@
           <form name="food" id="food" class="" method="post" action"{% url 'myfoodjournaladd' %}">
             {% csrf_token %}
               <div>
+                <p>{{success}}</p>
                 {% if user.is_authenticated %}
                   <input type="text" name="username" id="username" value="{{user.username}}" hidden>
                 {% endif %}

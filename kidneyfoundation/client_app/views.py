@@ -121,50 +121,87 @@ def myFoodJournalView(request):
 
 def myFoodJournalAdd(request):
     if (request.method == 'POST'):
-        if (request.POST.get('existing') == 'no-exist'):
-            posted_date = request.POST.get('day')
-            new_food = Food_Item()
-            new_food.food_type = Food_Type.objects.get(id = int(request.POST.get('food_type')))
-            new_food.name = request.POST.get('name').lower()
-            new_food.description = request.POST.get('desc').lower()
-            new_food.units = Food_Units.objects.get(id=request.POST.get('units'))
-            new_food.sodium = float(request.POST.get('na'))
-            new_food.protein = float(request.POST.get('protein'))
-            new_food.potassium = float(request.POST.get('k'))
-            new_food.phosphorus = float(request.POST.get('phos'))
-            new_food.water = float(request.POST.get('water'))
-            new_food.save()
+        try:
+            if (request.POST.get('existing') == 'no-exist'):
+                posted_date = request.POST.get('day')
+                new_food = Food_Item()
+                new_food.food_type = Food_Type.objects.get(id = int(request.POST.get('food_type')))
+                new_food.name = request.POST.get('name').lower()
+                new_food.description = request.POST.get('desc').lower()
+                new_food.units = Food_Units.objects.get(id=request.POST.get('units'))
+                new_food.sodium = float(request.POST.get('na'))
+                new_food.protein = float(request.POST.get('protein'))
+                new_food.potassium = float(request.POST.get('k'))
+                new_food.phosphorus = float(request.POST.get('phos'))
+                new_food.water = float(request.POST.get('water'))
+                new_food.save()
 
-            food_entry = Report_Food()
-            food_entry.username = request.POST.get('username')
-            food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
-            food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
-            food_entry.eating_time = request.POST.get('eating_time')
-            food_entry.units_count = float(request.POST.get('quantity'))
-            food_entry.food = Food_Item.objects.get(name = request.POST.get('name'))
-            food_entry.water = (float(request.POST.get('water')) * float(request.POST.get('quantity')))
-            food_entry.sodium = (float(request.POST.get('na')) * float(request.POST.get('quantity')))
-            food_entry.potassium = (float(request.POST.get('k')) * float(request.POST.get('quantity')))
-            food_entry.phosphorus = (float(request.POST.get('phos')) * float(request.POST.get('quantity')))
-            food_entry.protein = (float(request.POST.get('protein')) * float(request.POST.get('quantity')))
-            food_entry.save()
+                food_entry = Report_Food()
+                food_entry.username = request.POST.get('username')
+                food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
+                food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
+                food_entry.eating_time = request.POST.get('eating_time')
+                food_entry.units_count = float(request.POST.get('quantity'))
+                food_entry.food = Food_Item.objects.get(name = request.POST.get('name').lower())
+                food_entry.water = (float(request.POST.get('water')) * float(request.POST.get('quantity')))
+                food_entry.sodium = (float(request.POST.get('na')) * float(request.POST.get('quantity')))
+                food_entry.potassium = (float(request.POST.get('k')) * float(request.POST.get('quantity')))
+                food_entry.phosphorus = (float(request.POST.get('phos')) * float(request.POST.get('quantity')))
+                food_entry.protein = (float(request.POST.get('protein')) * float(request.POST.get('quantity')))
+                food_entry.save()
 
-        else:
-            posted_date = request.POST.get('day')
-            food_entry = Report_Food()
-            food = Food_Item.objects.get(name = request.POST.get('combo_food'))
-            food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
-            food_entry.food = food
-            food_entry.username = request.POST.get('username')
-            food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
-            food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
-            food_entry.eating_time = request.POST.get('eating_time')
-            food_entry.units_count = float(request.POST.get('quantity'))
-            food_entry.sodium = (float(request.POST.get('quantity')) * float(food.sodium))
-            food_entry.potassium = (float(request.POST.get('quantity')) * float(food.potassium))
-            food_entry.phosphorus = (float(request.POST.get('quantity')) * float(food.phosphorus))
-            food_entry.protein = (float(request.POST.get('quantity')) * float(food.protein))
-            food_entry.save()
+            else:
+                posted_date = request.POST.get('day')
+                food_entry = Report_Food()
+                food = Food_Item.objects.get(name = request.POST.get('combo_food'))
+                food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
+                food_entry.food = food
+                food_entry.username = request.POST.get('username')
+                food_entry.patient = Patient.objects.get(username = request.POST.get('username'))
+                food_entry.date = dt.datetime.strptime(posted_date, '%Y-%m-%d')
+                food_entry.eating_time = request.POST.get('eating_time')
+                food_entry.units_count = float(request.POST.get('quantity'))
+                food_entry.sodium = (float(request.POST.get('quantity')) * float(food.sodium))
+                food_entry.potassium = (float(request.POST.get('quantity')) * float(food.potassium))
+                food_entry.phosphorus = (float(request.POST.get('quantity')) * float(food.phosphorus))
+                food_entry.protein = (float(request.POST.get('quantity')) * float(food.protein))
+                food_entry.save()
+                foods = Food_Item.objects.all()
+                food_types = Food_Type.objects.all()
+                food_units = Food_Units.objects.all()
+
+                context = {
+                    'foods': foods,
+                    'food_types': food_types,
+                    'food_units': food_units,
+                    'success': success
+                    #'potassium': potassium_level,
+                    #'sodium': sodium_level,
+                    #'phosphorus': phosphorus_level,
+                    #'protein': protein_level,
+                    #'water': water_level,
+                }
+                return render(request, 'client_app/addjournalentry.html', context)
+        except:
+            success = 'Not in database. Please create a new item.'
+            foods = Food_Item.objects.all()
+            food_types = Food_Type.objects.all()
+            food_units = Food_Units.objects.all()
+
+            context = {
+                'foods': foods,
+                'food_types': food_types,
+                'food_units': food_units,
+                'success': success
+                #'potassium': potassium_level,
+                #'sodium': sodium_level,
+                #'phosphorus': phosphorus_level,
+                #'protein': protein_level,
+                #'water': water_level,
+            }
+            return render(request, 'client_app/addjournalentry.html', context)
+    else:
+        success = ''
         
     foods = Food_Item.objects.all()
     food_types = Food_Type.objects.all()
@@ -174,6 +211,7 @@ def myFoodJournalAdd(request):
         'foods': foods,
         'food_types': food_types,
         'food_units': food_units,
+        'success': success
         #'potassium': potassium_level,
         #'sodium': sodium_level,
         #'phosphorus': phosphorus_level,
@@ -208,7 +246,7 @@ def myDashboardView(request):
 
         try:
             username = request.user.get_username()
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Sodium) as sodium
             FROM
@@ -226,7 +264,7 @@ def myDashboardView(request):
             conn.close()
             sodium = [item for t in user_sodium for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Potassium) as potassium
             FROM
@@ -245,7 +283,7 @@ def myDashboardView(request):
             conn.close()
             potassium = [item for t in user_potassium for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Phosphorus) as phosphorus
             FROM
@@ -264,7 +302,7 @@ def myDashboardView(request):
             conn.close()
             phosphorus = [item for t in user_phosphorus for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Protein) as protein
             FROM
@@ -283,7 +321,7 @@ def myDashboardView(request):
             conn.close()
             protein = [item for t in user_protein for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Water) as water
             FROM
@@ -302,7 +340,7 @@ def myDashboardView(request):
             conn.close()
             water = [item for t in user_water for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
             cur = conn.cursor()
             cur.execute(""" SELECT sex FROM patient
             WHERE username= %s; """,(username,))
@@ -314,7 +352,7 @@ def myDashboardView(request):
             if sex[0] == 'male' :
                 male = sex[0]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
             cur = conn.cursor()
             cur.execute(""" SELECT weight FROM patient
             WHERE username= %s; """,(username,))
@@ -399,7 +437,6 @@ def myProfileView(request):
         return render(request, 'client_app/myprofile.html', context)
     else:
         return redirect('login')
-
 
 def myCommunityView(request):
     return render(request, 'client_app/mycommunity.html')

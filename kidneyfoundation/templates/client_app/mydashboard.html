@@ -94,17 +94,19 @@
                     {% endif %}
                   {% endfor %}
                   {% for protein in user_protein %}
-                    {% if protein > user_weight %}
+                  {% for weight in user_weight %}
+                    {% if protein > weight %}
                       <p><span style="font-weight: bold;">Protein - Avoid eating things like meat and eggs</span></p>
                     {% endif %}
+                    {% endfor %}
                   {% endfor %}
                   {% for potas in user_potassium %}
                     {% if potas > max_potassium %}
                       <p><span style="font-weight: bold;">Potassium - Avoid eating things like fresh fruits and potatoes</span></p>
                     {% endif %}
                   {% endfor %}
-                  {% if sex == 'male' %}
-                    {% for w in water %}
+                  {% if user_male == 'male' %}
+                    {% for w in user_water %}
                       {% if w > max_water_male %}
                         <p><span style="font-weight: bold;">Water - Good job drinking, but maybe drink a few less glasses</span></p>
                       {% endif %}
@@ -138,17 +140,19 @@
                   {% endif %}
                 {% endfor %}
                 {% for protein in user_protein %}
-                  {% if protein < user_weight and protein > user_weight %}
+                {% for weight in user_weight %}
+                  {% if protein < weight and protein > weight %}
                     <p><span style="font-weight: bold;">Protein</span></p>
                   {% endif %}
+                {% endfor %}
                 {% endfor %}
                 {% for potas in user_potassium %}
                   {% if potas < max_potassium and potas > min_potassium %}
                     <p><span style="font-weight: bold;">Potassium</span></p>
                   {% endif %}
                 {% endfor %}
-                {% if sex == 'male' %}
-                  {% for w in water %}
+                {% if user_male == 'male' %}
+                  {% for w in user_water %}
                     {% if w < max_water_male and w > min_water_male%}
                       <p><span style="font-weight: bold;">Water</span></p>
                     {% endif %}
@@ -181,17 +185,19 @@
                   {% endif %}
                 {% endfor %}
                 {% for protein in user_protein %}
-                  {% if protein < user_weight %}
+                {% for weight in user_weight %}
+                  {% if protein < weight %}
                     <p><span style="font-weight: bold;">Protein</span> - Have some of your favorite meat or some beans</p>
                   {% endif %}
+                  {% endfor %}
                 {% endfor %}
                 {% for potas in user_potassium %}
                   {% if potas < min_potassium %}
                     <p><span style="font-weight: bold;">Potassium</span> - Eat a banana or some beans</p>
                   {% endif %}
                 {% endfor %}
-                {% if sex == 'male' %}
-                  {% for w in water %}
+                {% if user_male %}
+                  {% for w in user_water %}
                     {% if w < min_water_male%}
                       <p><span style="font-weight: bold;">Water</span> - Have another glass or two</p>
                     {% endif %}
