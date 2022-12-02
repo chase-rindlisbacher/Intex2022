@@ -306,7 +306,7 @@ def myDashboardView(request):
             conn.close()
             protein = [item for t in user_protein for item in t]
 
-            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Water) as water
             FROM
