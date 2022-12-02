@@ -306,6 +306,25 @@ def myDashboardView(request):
             conn.close()
             protein = [item for t in user_protein for item in t]
 
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            cur = conn.cursor()
+            cur.execute(""" SELECT sum(Water) as water
+            FROM
+            (SELECT date,username,(water * Quantity) as Water
+			 FROM
+            (SELECT date,sum(units_count) as Quantity,food_id,username
+            FROM report_food
+            GROUP BY food_id, date,username) AS sq1
+            INNER JOIN food_item as fi ON sq1.food_id = fi.id) sq2
+            GROUP BY date,username
+            HAVING (sq2.username = %s ) and (cast(sq2.date as date) = CURRENT_DATE)
+            ORDER BY sq2.date asc; """, (username,))
+
+            user_water = cur.fetchall()
+            cur.close()
+            conn.close()
+            water = [item for t in user_water for item in t]
+
             context = {
             'mg_nutrients': mg_nutrients,
             'g_nutrients': g_nutrients,
@@ -314,6 +333,7 @@ def myDashboardView(request):
             'user_potassium' : potassium,
             'user_phosphorus' : phosphorus,
             'user_protein' : protein,
+            'user_water' : water,
             }
             # sq_food = Report_Food.objects.raw(f'SELECT ')
             # sq1 = Report_Food.objects.raw(f'SELECT * FROM report_food WHERE username={username}')
