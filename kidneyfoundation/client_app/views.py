@@ -107,7 +107,7 @@ def myFoodJournalView(request):
         report = Report_Food.objects.get(id=to_delete)
 
         report.delete()
-        
+
     if request.user.is_authenticated:
         foods = Report_Food.objects.filter(username = request.user.get_username()).order_by('-date')
 
@@ -384,20 +384,22 @@ def myProfileView(request):
 
         patient.save()
         
-        
+    if (request.user.is_authenticated):
 
-    uname = request.user.get_username()
+        uname = request.user.get_username()
 
-    patient = Patient.objects.get(username = uname)
+        patient = Patient.objects.get(username = uname)
 
-    diagnoses = Condition.objects.all()
+        diagnoses = Condition.objects.all()
 
-    context = {
-        'patient': patient,
-        'diagnoses': diagnoses
-    }
+        context = {
+            'patient': patient,
+            'diagnoses': diagnoses
+        }
+        return render(request, 'client_app/myprofile.html', context)
+    else:
+        return redirect('login')
 
-    return render(request, 'client_app/myprofile.html', context)
 
 def myCommunityView(request):
     return render(request, 'client_app/mycommunity.html')
