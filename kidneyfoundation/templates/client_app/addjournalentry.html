@@ -9,7 +9,6 @@
     <li><a class="nav-link scrollto" href="{% url 'index' %}">Home</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mydashboard' %}">MyDashboard</a></li>
     <li><a class="nav-link scrollto active" href="{% url 'myfoodjournal' %}">MyFoodJournal</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'mymenu' %}">MyMenu</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mycommunity' %}">MyCommunity</a></li>
     <li><a class="nav-link scrollto" href="{% url 'index' %}">MyLearningCenter</a></li>
     <li><a class="nav-link scrollto" href="{% url 'myprofile' %}">MyProfile</a></li>
@@ -103,7 +102,7 @@
                     <i></i>
                     <div>
                       <input type="number" id="na" placeholder='500' name='na' step=".1" />
-                      <label for="desc">Sodium (mg)</label>
+                      <label for="desc">Sodium (mg) of one unit of food</label>
                     </div>
                   </div>
                   <br>
@@ -111,7 +110,7 @@
                     <i></i>
                     <div>
                       <input type="number" id="protein" placeholder='5' name='protein' step=".1" />
-                      <label for="protein">Protein (g)</label>
+                      <label for="protein">Protein (g) of one unit of food</label>
                     </div>
                   </div>
                   <br>
@@ -119,7 +118,7 @@
                     <i></i>
                     <div>
                       <input type="number" id="k" placeholder='200' name='k' step=".1" />
-                      <label for="k">Potassium (mg)</label>
+                      <label for="k">Potassium (mg) of one unit of food</label>
                     </div>
                   </div>
                   <br>
@@ -127,7 +126,7 @@
                     <i></i>
                     <div>
                       <input type="number" id="phos" placeholder='200' name='phos' step=".1" />
-                      <label for="phos">Phosphorus (mg)</label>
+                      <label for="phos">Phosphorus (mg) of one unit of food</label>
                     </div>
                   </div>
                 </div>
@@ -157,7 +156,7 @@
                   <i></i>
                   <div>
                     <input type="number" name="quantity" id="quantity" step="0.5" required>
-                    <label for="quantity">Quantity</label>
+                    <label for="quantity">Quantity eaten</label>
                   </div>
                 </div>
                 <br>
