@@ -61,7 +61,9 @@
           <h3>View your progress</h3>
           <p>
             Here you'll see a visual of all your hard work! Plus, we will give you advice based on what you should be eating whenever you visit this page.
+            We have data for all important nutrients for kidney patients, including, Sodium, Potassium, Phosphorus, Protein, and Water intake.
           </p>
+          <p>**Please note that only nutrients that have been part of a food item for today are visible. Eat more food to see all the nutrients!**</p>
           {% if user.is_authenticated %}
           <div class="text-center">
             <a href="{% url 'myfoodjournaladd' %}" class="more-btn">Add a journal entry<i class="bx bx-chevron-right"></i></a>
@@ -78,7 +80,7 @@
           <div class="row">
             <div class="col-xl-4 d-flex align-items-stretch">
               <div class="icon-box mt-4 mt-xl-0">
-                <i class="bx bx-book-add"></i>
+                <i class="bx bx-dish"></i>
                 <h4>High</h4>
                 {% if user.is_authenticated %}
                   {% for s in user_sodium %}
@@ -165,7 +167,7 @@
             </div>
             <div class="col-xl-4 d-flex align-items-stretch">
               <div class="icon-box mt-4 mt-xl-0">
-                <i class="bx bx-donate-heart"></i>
+                <i class="bx bx-bowl-hot"></i>
                 <h4>Low</h4>
                 {% if user.is_authenticated %}
                 {% for s in user_sodium %}

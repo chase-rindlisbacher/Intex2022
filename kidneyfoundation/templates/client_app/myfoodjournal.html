@@ -70,7 +70,7 @@
               <div class="row">
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-book-add"></i>
+                    <i class="bx bx-show"></i>
                     <h4>View Previous Food</h4>
                     <p>As you input more food, it becomes easier to analyze your habits and help you grow.</p>
                     <p>Below this section is a copy of your most recent entries. Take a look!</p>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-smile"></i>
+                    <i class="bx bx-plus"></i>
                     <h4>Add new entries</h4>
                     <p>After you eat or drink something, don't forget to add it here! It's important to stay up-to-date.</p>
                     <p>Click the "add food" button above to make it happen.</p>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-xl-4 d-flex align-items-stretch">
                   <div class="icon-box mt-4 mt-xl-0">
-                    <i class="bx bx-donate-heart"></i>
+                    <i class="bx bx-bowl-hot"></i>
                     <h4>Find new food</h4>
                     <p>Check out the links below to get more food options for your menu</p>
                     <a href="https://www.kidney.org/recipes-search">National Kidney Foundation Recipes</a>
@@ -121,6 +121,7 @@
               <td>Potassium</td>
               <td>Phosphorus</td>
               <td>Protein</td>
+              <td>Delete Entry</td>
             </thead>
             <br>
             <tbody>
@@ -134,6 +135,13 @@
                 <td>{{f.potassium}}</td>
                 <td>{{f.phosphorus}}</td>
                 <td>{{f.protein}}</td>
+                <td>
+                  <form id="delete_entry" name="delete_entry" method="post" action="{% url 'myfoodjournal' %}">
+                    {% csrf_token %}
+                    <input type="number" name="entry_id" value="{{f.id}}" hidden>
+                    <button type="submit">Delete</button>
+                  </form>
+                </td>
               </tr>
               {% endfor %}
             </tbody>
