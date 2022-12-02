@@ -9,10 +9,7 @@
     <li><a class="nav-link scrollto" href="{% url 'index' %}">Home</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mydashboard' %}">MyDashboard</a></li>
     <li><a class="nav-link scrollto active" href="{% url 'myfoodjournal' %}">MyFoodJournal</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'mymenu' %}">MyMenu</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mycommunity' %}">MyCommunity</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'index' %}">MyLearningCenter</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'myprofile' %}">MyProfile</a></li>
     <li><a class="nav-link scrollto" href="{% url 'index' %}#faq">FAQ</a></li>
     <!-- Keep but don't use right now 
     <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
@@ -52,71 +49,94 @@
 
   <main id="main">
     {% comment %} Food Journal Section {% endcomment %}
-    <section>
-      
-    </section>
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="content">
+              <h3>Eating habits are important</h3>
+              <p>
+                Your body reacts to what you eat. Our goal is to help you make the right choices so you stay healthy.
+              </p>
+              <div class="text-center">
+                <a href="{% url 'index' %}" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8 d-flex align-items-stretch">
+            <div class="icon-boxes d-flex flex-column justify-content-center">
+              <div class="row">
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-book-add"></i>
+                    <h4>View Previous Food</h4>
+                    <p>As you input more food, it becomes easier to analyze your habits and help you grow.</p>
+                    <p>Below this section is a copy of your most recent entries. Take a look!</p>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-smile"></i>
+                    <h4>Add new entries</h4>
+                    <p>After you eat or drink something, don't forget to add it here! It's important to stay up-to-date.</p>
+                    <p>Click the "add food" button above to make it happen.</p>
+                  </div>
+                </div>
+                <div class="col-xl-4 d-flex align-items-stretch">
+                  <div class="icon-box mt-4 mt-xl-0">
+                    <i class="bx bx-donate-heart"></i>
+                    <h4>Find new food</h4>
+                    <p>Check out the links below to get more food options for your menu</p>
+                    <a href="https://www.kidney.org/recipes-search">National Kidney Foundation Recipes</a>
+                    <a href="https://www.davita.com/diet-nutrition/recipes">Davita Kidney Care</a>
+                  </div>
+                </div>
+              </div>
+            </div><!-- End .content-->
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
       <div class="container">
 
         <div class="section-title">
-          <h2>Services</h2>
-          <p>To help you achieve your wellbeing goals, we're happy to offer 6 services</p>
+          <h2>Your MyFoodJournal Entries</h2>
+          <p>Here's where you can find the most up-to date food inputs from your account over the last 10-days!</p>
         </div>
-
-        <div class="row">
-          
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-chart-line"></i></div>
-              <h4><a href="">MyDashboard</a></h4>
-              <p>See your progress towards your daily, weekly, and monthly goals</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-edit"></i></div>
-              <h4><a href="">MyFoodJournal</a></h4>
-              <p>Keep a journal of everything you eat and we'll help you stay on track with your essential nutrients</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-apple-alt"></i></div>
-              <h4><a href="">MyDiet</a></h4>
-              <p>See what you've eaten recently and get tips for foods you might like</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-building"></i></div>
-              <h4><a href="">MyCommunity</a></h4>
-              <p>View and edit your support community. You have full control over your profile's interactions</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-school"></i></div>
-              <h4><a href="">MyLearningCenter</a></h4>
-              <p>Take a minute to learn more about kidney diseases, like CKD, and how life can be enjoyed through lifestyle changes</p>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-            <div class="icon-box">
-              <div class="icon"><i class="fas fa-house-user"></i></div>
-              <h4><a href="">MyProfile</a></h4>
-              <p>Manage and edit your profile. It's important to keep it up-to-date and accurate</p>
-            </div>
-          </div>
-
-        </div>
-
+        <div class="row" style="flex: none;">
+          <table>
+            <thead>
+              <td>Date</td>
+              <td>Meal</td>
+              <td>Item</td>
+              <td>Quantity</td>
+              <td>Sodium</td>
+              <td>Potassium</td>
+              <td>Phosphorus</td>
+              <td>Protein</td>
+            </thead>
+            <br>
+            <tbody>
+              {% for f in foods %}
+              <tr>
+                <td>{{f.date}}</td>
+                <td>{{f.eating_time}}</td>
+                <td>{{f.food}}</td>
+                <td>{{f.units_count}}</td>
+                <td>{{f.sodium}}</td>
+                <td>{{f.potassium}}</td>
+                <td>{{f.phosphorus}}</td>
+                <td>{{f.protein}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
       </div>
     </section>
     <!-- End Services Section -->

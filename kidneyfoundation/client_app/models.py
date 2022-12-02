@@ -111,25 +111,17 @@ class Food_Type(models.Model):
     class Meta:
         db_table = 'food_type'
 
-class Fluid_Type(models.Model):
-    name = models.CharField(max_length=30)
-
-    def __str__(self):
-        return (f'{self.name}')
-    
-    class Meta:
-        db_table = 'fluid_type'
-
 class Food_Item(models.Model):
     food_type = models.ForeignKey(Food_Type, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     description = models.CharField(max_length=500)
     units = models.ForeignKey(Food_Units, on_delete=models.DO_NOTHING)
 
-    sodium = models.FloatField()
-    protein = models.FloatField()
-    potassium = models.FloatField()
-    phosphorus = models.FloatField()
+    water = models.FloatField(default=0)
+    sodium = models.FloatField(default=0)
+    protein = models.FloatField(default=0)
+    potassium = models.FloatField(default=0)
+    phosphorus = models.FloatField(default=0)
 
     def __str__(self):
         return self.name
@@ -137,50 +129,26 @@ class Food_Item(models.Model):
     class Meta:
         db_table = 'food_item'
 
-class Drink_Item(models.Model):
-    fluid_type = models.ForeignKey(Fluid_Type, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30, default='Water')
-    description = models.CharField(max_length=500)
-    units = models.ForeignKey(Food_Units, on_delete=models.DO_NOTHING)
-
-    water = models.FloatField()
-    sodium = models.FloatField(blank=True)
-    protein = models.FloatField(blank=True)
-    potassium = models.FloatField(blank=True)
-    phosphorus = models.FloatField(blank=True)
-
-    def __str__(self):
-        return self.name
-    
-    class Meta:
-        db_table = 'drink_item'
-
 class Report_Food(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     username = models.CharField(max_length=150, default='')
-    date = models.DateTimeField()
+    date = models.DateField()
     eating_time = models.CharField(max_length=10, default='Snack')
     units_count = models.FloatField()
     food = models.ForeignKey(Food_Item, on_delete=models.DO_NOTHING)
+    water = models.FloatField(default=0)
+    sodium = models.FloatField(default=0)
+    potassium = models.FloatField(default=0)
+    phosphorus = models.FloatField(default=0)
+    protein = models.FloatField(default=0)
 
     class Meta:
         db_table = 'report_food'
 
-class Report_Drink(models.Model):
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    username = models.CharField(max_length=150, default='')
-    date = models.DateTimeField()
-    eating_time = models.CharField(max_length=10, default='Snack')
-    units_count = models.FloatField()
-    drink = models.ForeignKey(Drink_Item, on_delete=models.DO_NOTHING)
-
-    class Meta:
-        db_table = 'report_drink'
-
 class Report_Serum(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
     username = models.CharField(max_length=150, default='')
-    date = models.DateTimeField()
+    date = models.DateField()
     
     potassium = models.FloatField()
     phosphorus = models.FloatField()

@@ -9,10 +9,7 @@
     <li><a class="nav-link scrollto" href="{% url 'index' %}">Home</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mydashboard' %}">MyDashboard</a></li>
     <li><a class="nav-link scrollto active" href="{% url 'myfoodjournal' %}">MyFoodJournal</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'mymenu' %}">MyMenu</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mycommunity' %}">MyCommunity</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'index' %}">MyLearningCenter</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'myprofile' %}">MyProfile</a></li>
     <li><a class="nav-link scrollto" href="{% url 'index'  %}#faq">FAQ</a></li>
     <!-- Keep but don't use right now 
     <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
@@ -46,108 +43,134 @@
       <h1>Add what you ate or drank</h1>
     
         <div>
-          <select name="type" id="type" onchange="SelectInputType(this)">
-            <option value="" selected hidden>Choose One</option>
-            <option value="food">Food</option>
-            <option value="drink">Drink</option>
-          </select>
-          <label for="type">Choose an entry type</label>
-          <br><br><br>
-          <form name="food" id="food" class="d-none" method="post" action"{% url 'myfoodjournaladd' %}">
+          <br><br>
+          <form name="food" id="food" class="" method="post" action"{% url 'myfoodjournaladd' %}">
             {% csrf_token %}
               <div>
                 {% if user.is_authenticated %}
                   <input type="text" name="username" id="username" value="{{user.username}}" hidden>
                 {% endif %}
                 <input type="text" name="form_type" id="form_type" value="food" hidden>
-                <select id="f_items" name="f_items">
-                  <option value="new" selected>Add new food</option>
-                  {% for food in foods %}
-                  <option value="{{food.id}}">{{food.name}}</option>
-                  {% endfor %}
-                </select>
-                <i></i>
-                <br><br>
-                <label for="f_items">Choose a food, or add a new one</label>
-                <div id="not_exist">
-                <div>
-                  <input type="text" id="name" placeholder='spaghetti' name='name' required />
-                  <label for="name">Name of Item</label>
+                <input type="text" name="existing" id="existing" value="exists" hidden>
+                <div id="presets">
+                  <input type="text" name="combo_food" id="combo_food" list="food_options">
+                  <datalist id="food_options">
+                    {% for food in foods %}
+                    <option>{{food.name}}</option>
+                    {% endfor %}
+                  </datalist>
+                  <label for="combo_food">Choose a food or</label>
+                  <button type="button" id="add_new_button" onclick="AddNew()">Add new</button>
+                  <i></i>
                 </div>
-              </div>
-              <br>
-              <div>
-                <i></i>
-                <div>
-                  <input type="text" id="desc" placeholder='has tomatoes, noodles, and meat' name='desc' required />
-                  <label for="desc">Description</label>
+                <div id="not_exist" class="d-none">
+                  <h5 id="new_header"></h5>
+                  <div>
+                    <input type="text" id="name" placeholder='spaghetti' name='name' />
+                    <label for="name">Name of Item</label>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="text" id="desc" placeholder='has tomatoes, noodles, and meat' name='desc' />
+                      <label for="desc">Description</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <select id="food_type" name='food_type' />
+                        <option value="" hidden selected>Choose a food type</option>
+                        {% for type in food_types %}
+                          <option value="{{type.id}}">{{type.name}}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  </br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="number" id="na" placeholder='500' name='na' step=".1" />
+                      <label for="desc">Sodium (mg) of one unit of food</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="number" id="protein" placeholder='5' name='protein' step=".1" />
+                      <label for="protein">Protein (g) of one unit of food</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="number" id="k" placeholder='200' name='k' step=".1" />
+                      <label for="k">Potassium (mg) of one unit of food</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="number" id="phos" placeholder='200' name='phos' step=".1" />
+                      <label for="phos">Phosphorus (mg) of one unit of food</label>
+                    </div>
+                  </div>
+                  <br>
+                  <div>
+                    <i></i>
+                    <div>
+                      <input type="number" id="water" placeholder='200' name='water' step=".1" />
+                      <label for="water">Water (L)</label>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <br>
-              <div>
-                <i></i>
+                <br>
                 <div>
-                  <input type="number" id="na" placeholder='500' name='na' required />
-                  <label for="desc">Sodium (mg)</label>
+                  <i></i>
+                  <div> 
+                    <input type="date" id="day" name='day' required />
+                    <label for="day">Date</label>
+                  </div>
                 </div>
-              </div>
-              <br>
-              <div>
-                <i></i>
+                <br>
                 <div>
-                  <input type="number" id="protein" placeholder='5' name='protein' required />
-                  <label for="protein">Protein (g)</label>
+                  <i></i>
+                  <div>
+                    <select id='eating_time' name="eating_time" required>
+                      <option value="breakfast">Breakfast</option>
+                      <option value="lunch">Lunch</option>
+                      <option value="dinner">Dinner</option>
+                      <option value="snack">Snack</option>
+                    </select>
+                    <label for='eating_time'>When you ate</label>
+                  </div>
                 </div>
-              </div>
-              <br>
-              <div>
-                <i></i>
+                <br>
                 <div>
-                  <input type="number" id="k" placeholder='200' name='k' required />
-                  <label for="k">Potassium (mg)</label>
+                  <i></i>
+                  <div>
+                    <input type="number" name="quantity" id="quantity" step="0.5" required>
+                    <label for="quantity">Quantity eaten</label>
+                  </div>
                 </div>
-              </div>
-              <br>
-              <div>
-                <i></i>
+                <br>
                 <div>
-                  <input type="number" id="phos" placeholder='200' name='phos' required />
-                  <label for="phos">Phosphorus (mg)</label>
-                </div>
-              </div>
-            </div>
-              <br>
-              <div>
-                <i></i>
-                <div>
-                  <input type="date" id="day" name='day' required />
-                  <label for="day">Date</label>
-                </div>
-              </div>
-              <br>
-              <div>
-                <i></i>
-                <div>
-                  <select id='eating_time' required>
-                    <option>Breakfast</option>
-                    <option>Lunch</option>
-                    <option>Dinner</option>
-                    <option>Snack</option>
+                  <select name="units" id="units">
+                    {% for unit in food_units %}
+                    <option value="{{unit.id}}">{{unit.name}}</option>
+                    {% endfor %}
                   </select>
-                  <label for='eating_time'>When you ate</label>
                 </div>
               </div>
               <br>
-              <div>
-                <i></i>
-                <div>
-                  <input type="number" id="quantity" default='1' placeholder='1' name='quantity' required />
-                  <label for="quantity">Quantity</label>
-                </div>
-              </div>
-              <br><br>
               <button type="submit">Submit</button>
-          </form>
+           </form>
         </div>
         <br><br><br><br><br><br>
     </div>
@@ -155,13 +178,12 @@
 {% endblock %}
 {% block jsblock %}
     <script>
-      function SelectInputType(that) {
-        food = document.getElementById('food')
-        if (that.value == 'food') {
-          food.classList.remove('d-none')
-        } else {
-          food.classList.add('d-none')
-        }
+      function AddNew() {
+        document.getElementById('not_exist').classList.remove('d-none')
+        document.getElementById('presets').classList.add('d-none')
+        document.getElementById('new_header').innerHTML = 'Please provide this info'
+        document.getElementById('existing').value = 'no-exist'
+        
       }
     </script>
 {% endblock%}

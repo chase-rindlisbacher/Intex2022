@@ -9,10 +9,7 @@
     <li><a class="nav-link scrollto" href="{% url 'index' %}">Home</a></li>
     <li><a class="nav-link scrollto active" href="{% url 'mydashboard' %}">MyDashboard</a></li>
     <li><a class="nav-link scrollto" href="{% url 'myfoodjournal' %}">MyFoodJournal</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'mymenu' %}">MyMenu</a></li>
     <li><a class="nav-link scrollto" href="{% url 'mycommunity' %}">MyCommunity</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'index' %}">MyLearningCenter</a></li>
-    <li><a class="nav-link scrollto" href="{% url 'myprofile' %}">MyProfile</a></li>
     <li><a class="nav-link scrollto" href="{% url 'index' %}#faq">FAQ</a></li>
     <!-- Keep but don't use right now 
     <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
@@ -42,16 +39,265 @@
 {% endif %}{% endblock %}
 {% block content %}
 <!-- ======= Hero Section ======= -->
-<section id="hero-dashboard" class="d-flex align-items-center">
+<section id="hero" class="d-flex align-items-center">
     <div class="container">
       <h1>Track your nutritional goals</h1>
       <h2>These charts are your friend. Our goal is to help you visualize your progess, give tips for how you can reach your goals, and help you enjoy your kidney-friendly lifestyle</h2>
+      {% if user.is_authenticated %}
+      {% else %}
       <a href="{% url 'login' %}" class="btn-get-started scrollto">Get Started</a>
+      {% endif %}
     </div>
   </section><!-- End Hero -->
-
   <main id="main">
+<!-- ======= Why Us Section ======= -->
+<section id="why-us" class="why-us">
+  <div class="container">
 
+    <div class="row">
+      <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="content">
+          <h3>Our Approach: </h3>
+          <p>
+            Our goal is to help educate, create a community of support, and provide rewards to kidney disease patients as they make lifestyle changes. We also strive to help existing patients continue to live a healthy lifestyle with those same goals!
+          </p>
+          {% if user.is_authenticated %}
+          <p>See all the options we have available to make the most of your experience</p>
+          {% else %}
+          <p>For the best experience, please create an account or login!</p>
+          {% endif %}
+          <div class="text-center">
+            <a href="{% url 'index' %}" class="more-btn">Learn More <i class="bx bx-chevron-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 d-flex align-items-stretch">
+        <div class="icon-boxes d-flex flex-column justify-content-center">
+          <div class="row">
+            <div class="col-xl-4 d-flex align-items-stretch">
+              <div class="icon-box mt-4 mt-xl-0">
+                <i class="bx bx-book-add"></i>
+                <h4>Educate</h4>
+                <p>Not a food or exercise guru? We've got your back!</p>
+                {% if user.is_authenticated %}
+                <p>Head over to our FAQ page to get the best kidney-friendly recipes for you and your family!</p>
+                {% else %}
+                <p>Login to your account or provide us with a few anonymous details and we can customize your kidney diet to help you reach your goals.</p>
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-xl-4 d-flex align-items-stretch">
+              <div class="icon-box mt-4 mt-xl-0">
+                <i class="bx bx-smile"></i>
+                <h4>Support</h4>
+                <p>Studies show that friendship makes lifestyle changes easier.</p>
+                <p>We provide you a way to be part of a customizable community that helps you meet lifestyle goals.</p>
+              </div>
+            </div>
+            <div class="col-xl-4 d-flex align-items-stretch">
+              <div class="icon-box mt-4 mt-xl-0">
+                <i class="bx bx-donate-heart"></i>
+                <h4>Reward</h4>
+                <p>You should be rewarded for all your hard work!</p>
+                <p>The more goals you achieve, the more points you receive – which can be converted into the prizes of your choice!</p>
+              </div>
+            </div>
+          </div>
+        </div><!-- End .content-->
+      </div>
+    </div>
+
+  </div>
+</section><!-- End Why Us Section -->
+    <section id="services" class="services">
+      {% if user.is_authenticated %}
+      <div class="row">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
+          <div class="icon-box">
+    <div id='pie_chart_mg' class='chartBox'>
+      <canvas id="myChart"></canvas>
+    </div>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const myChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+              labels: ["sodium",
+              "potassium",
+              "phosphorus",],
+              datasets: [{
+                  label: 'Sodium',
+                  data: [{% for t in user_sodium %} {{ t }}, {% endfor %}],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              },
+              {
+                label: 'Potassium',
+                  data: [{% for t in user_potassium %} {{ t }}, {% endfor %}],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              },
+              {
+                label: 'Phosphorus',
+                  data: [{% for t in user_phosphorus %} {{ t }}, {% endfor %}],
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)',
+                      'rgba(255, 206, 86, 0.2)',
+                      'rgba(75, 192, 192, 0.2)',
+                      'rgba(153, 102, 255, 0.2)',
+                      'rgba(255, 159, 64, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)',
+                      'rgba(255, 206, 86, 1)',
+                      'rgba(75, 192, 192, 1)',
+                      'rgba(153, 102, 255, 1)',
+                      'rgba(255, 159, 64, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+      </script>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+    <div class="icon-box">
+      <div id='pie_chart_g' class='chartBox'>
+        <canvas id="myChart2"></canvas>
+      </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+        const ctx2 = document.getElementById('myChart2').getContext('2d');
+        const myChart2 = new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: ["Protein",
+                ],
+                datasets: [{
+                    label: 'Protein',
+                    data: [{% for t in user_protein %} {{ t }}, {% endfor %}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+  
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        </script>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+      <div class="icon-box">
+        <div id='pie_chart_g' class='chartBox'>
+          <canvas id="myChart3"></canvas>
+        </div>
+          <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+          <script>
+          const ctx3 = document.getElementById('myChart3').getContext('2d');
+          const myChart3 = new Chart(ctx3, {
+              type: 'pie',
+              data: {
+                  labels: ["Water",
+                  ],
+                  datasets: [{
+                      label: 'Water',
+                      data: [{% for t in user_water %} {{ t }}, {% endfor %}],
+                      backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(255, 206, 86, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
+                          'rgba(255, 159, 64, 0.2)'
+                      ],
+                      borderColor: [
+                          'rgba(255, 99, 132, 1)',
+                          'rgba(54, 162, 235, 1)',
+                          'rgba(255, 206, 86, 1)',
+                          'rgba(75, 192, 192, 1)',
+                          'rgba(153, 102, 255, 1)',
+                          'rgba(255, 159, 64, 1)'
+                      ],
+                      borderWidth: 1
+                  }]
+    
+              },
+              options: {
+                  scales: {
+                      y: {
+                          beginAtZero: true
+                      }
+                  }
+              }
+          });
+          </script>
+        {% endif %}
+<<<<<<< HEAD
+    </section>
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
       <center>
@@ -66,22 +312,22 @@
             
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
               <div class="icon-box-dashboard container">
-                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
-
-                  <canvas id="chart" width="250" height="250"></canvas>
+                  <canvas id="chart1"></canvas>
+              </div>
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                   <script>
-                    let ctx = document.getElementById("chart").getContext("2d");
-                    let chart = new Chart(ctx, {
+                    let ctx1 = document.getElementById("chart1").getContext("2d");
+                    let chart1 = new Chart(ctx1, {
                       type: "radar",
                       data: {
                         labels: [
                           "potassium",
-                          "phospherus",
+                          "phosphorus",
                           "sodium",
                         ],
                         datasets: [
                           {
-                            label: "Potassium",
+                            label: "Potassium Ex",
                             data: [65, 59, 90, 81, 56, 55, 40],
                             fill: true,
                             backgroundColor: "rgba(255, 99, 132, 0.2)",
@@ -92,7 +338,7 @@
                             pointHoverBorderColor: "rgb(255, 99, 132)",
                           },
                           {
-                            label: "My Second Dataset",
+                            label: "Sodium Ex",
                             data: [28, 48, 40, 19, 96, 27, 100],
                             fill: true,
                             backgroundColor: "rgba(54, 162, 235, 0.2)",
@@ -103,7 +349,7 @@
                             pointHoverBorderColor: "rgb(54, 162, 235)",
                           },
                           {
-                            label: "My Third Dataset",
+                            label: "Phosphorus Ex",
                             data: [30, 60, 23, 38, 12, 74, 100],
                             fill: true,
                             backgroundColor: "rgba(48, 237, 41, 0.2)",
@@ -119,9 +365,10 @@
                         responsive: true,
                       },
                     });
+
+              
                   </script>
               </div>
-            </div>
 
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
               <div class="icon-box-dashboard container">
@@ -132,10 +379,12 @@
             </div>
 
           </div>
+=======
+>>>>>>> dalyn-branch
         </div>
-      </center>
-    </section>
-    <!-- End Services Section -->
+      </div>
+        </div>
+        </section>
 
  </main>
  <!-- End #main -->
