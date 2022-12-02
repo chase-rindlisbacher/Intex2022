@@ -150,6 +150,25 @@ def myFoodJournalAdd(request):
                 food_entry.protein = (float(request.POST.get('protein')) * float(request.POST.get('quantity')))
                 food_entry.save()
 
+                success = ''
+    
+                foods = Food_Item.objects.all()
+                food_types = Food_Type.objects.all()
+                food_units = Food_Units.objects.all()
+
+                context = {
+                    'foods': foods,
+                    'food_types': food_types,
+                    'food_units': food_units,
+                    'success': success
+                    #'potassium': potassium_level,
+                    #'sodium': sodium_level,
+                    #'phosphorus': phosphorus_level,
+                    #'protein': protein_level,
+                    #'water': water_level,
+                }
+                return render(request, 'client_app/addjournalentry.html', context)
+
             else:
                 posted_date = request.POST.get('day')
                 food_entry = Report_Food()
@@ -200,9 +219,9 @@ def myFoodJournalAdd(request):
                 #'water': water_level,
             }
             return render(request, 'client_app/addjournalentry.html', context)
-    else:
-        success = ''
-        
+    
+    success = ''
+    
     foods = Food_Item.objects.all()
     food_types = Food_Type.objects.all()
     food_units = Food_Units.objects.all()
