@@ -153,7 +153,7 @@ def myFoodJournalView(request):
             'min-protein': min_protein,
             'max-protein': max_protein,
             'min-water': min_water_man,
-            'max-water': max_water_man
+            'max-water': max_water_man,
         }
 
         return render(request, 'client_app/myfoodjournal.html', context)
@@ -325,6 +325,16 @@ def myDashboardView(request):
             conn.close()
             water = [item for t in user_water for item in t]
 
+            conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="joRdaN23#1")
+            cur = conn.cursor()
+            cur.execute(""" SELECT weight FROM patient
+            WHERE username= %s; """,(username,))
+
+            user_weight = cur.fetchall()
+            cur.close()
+            conn.close()
+            weight = [item for t in user_weight for item in t]
+            weight[0] = weight[0] * 0.6
             context = {
             'mg_nutrients': mg_nutrients,
             'g_nutrients': g_nutrients,
@@ -334,6 +344,7 @@ def myDashboardView(request):
             'user_phosphorus' : phosphorus,
             'user_protein' : protein,
             'user_water' : water,
+            'user_weight' : weight,
             }
             # sq_food = Report_Food.objects.raw(f'SELECT ')
             # sq1 = Report_Food.objects.raw(f'SELECT * FROM report_food WHERE username={username}')
