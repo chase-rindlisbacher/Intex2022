@@ -91,7 +91,7 @@
                     {% endif %}
                   {% endfor %}
                   {% for protein in user_protein %}
-                    {% if protein > max_protein %}
+                    {% if protein > user_weight %}
                       <p>Protein - </p>
                     {% endif %}
                   {% endfor %}
@@ -134,7 +134,7 @@
                   {% endif %}
                 {% endfor %}
                 {% for protein in user_protein %}
-                  {% if protein < max_protein and protein > min_protein %}
+                  {% if protein < user_weight and protein > user_weight %}
                     <p>Protein</p>
                   {% endif %}
                 {% endfor %}
@@ -177,7 +177,7 @@
                   {% endif %}
                 {% endfor %}
                 {% for protein in user_protein %}
-                  {% if protein < min_protein %}
+                  {% if protein < user_weight %}
                     <p>Protein</p>
                   {% endif %}
                 {% endfor %}
