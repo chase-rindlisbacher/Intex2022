@@ -90,6 +90,7 @@
                     <h4>Find new food</h4>
                     <p>Check out the links below to get more food options for your menu</p>
                     <a href="https://www.kidney.org/recipes-search">National Kidney Foundation Recipes</a>
+                    <br><br>
                     <a href="https://www.davita.com/diet-nutrition/recipes">Davita Kidney Care</a>
                   </div>
                 </div>
@@ -134,7 +135,7 @@
                 <td>{{f.sodium}}</td>
                 <td>{{f.potassium}}</td>
                 <td>{{f.phosphorus}}</td>
-                <td>{{f.protein}}</td>
+                <td>{{f.protein|floatformat:1}}</td>
                 <td>
                   <form id="delete_entry" name="delete_entry" method="post" action="{% url 'myfoodjournal' %}">
                     {% csrf_token %}

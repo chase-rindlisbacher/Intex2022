@@ -189,6 +189,8 @@ def myFoodJournalAdd(request):
                 food_types = Food_Type.objects.all()
                 food_units = Food_Units.objects.all()
 
+                success = ''
+
                 context = {
                     'foods': foods,
                     'food_types': food_types,
@@ -339,7 +341,7 @@ def myDashboardView(request):
             cur.close()
             conn.close()
             protein = [item for t in user_protein for item in t]
-
+            protein[0] = round(protein[0], 1)
             conn = psycopg2.connect(host="localhost", port = 5432, database="kidneys", user="postgres", password="P@55w0rd")
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Water) as water
