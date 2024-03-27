@@ -37,6 +37,7 @@ db.sqlite3
 *.spec
 
 # Installer logs
+get-pip.py
 pip-log.txt
 pip-delete-this-directory.txt
 
