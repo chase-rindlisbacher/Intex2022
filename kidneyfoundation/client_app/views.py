@@ -268,7 +268,7 @@ def myDashboardView(request):
 
         try:
             username = request.user.get_username()
-            conn = psycopg2.connect(host="localhost", port = 5432, database=os.getenv("DATABASE_NAME"), user="postgres", password=os.getenv("DATABASE_PASSWORD"))
+            conn = psycopg2.connect(host=os.getenv("HOST"), port = int(os.getenv("DATABASE_PORT")), database=os.getenv("DATABASE_NAME"), user=os.getenv("DATABASE_USER"), password=os.getenv("DATABASE_PASSWORD"))
             cur = conn.cursor()
             cur.execute(""" SELECT sum(Sodium) as sodium
             FROM
